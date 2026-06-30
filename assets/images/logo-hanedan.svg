@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" role="img" aria-labelledby="title desc">
+  <title id="title">Kayseri Hanedan Nakliyat</title>
+  <desc id="desc">Kırmızı beyaz Hanedan Nakliyat logosu</desc>
+  <rect width="520" height="160" rx="18" fill="#b51220"/>
+  <path d="M34 35h78v22H85v68H61V57H34z" fill="#fff"/>
+  <text x="130" y="74" fill="#fff" font-family="Arial, sans-serif" font-size="48" font-weight="900" letter-spacing="0">HANEDAN</text>
+  <rect x="130" y="91" width="324" height="35" rx="4" fill="#fff"/>
+  <text x="145" y="116" fill="#1d1d1d" font-family="Arial, sans-serif" font-size="24" font-weight="800">EV OFİS TAŞIMA</text>
+</svg>
