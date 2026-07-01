@@ -9,6 +9,7 @@ const primaryTel = "+905337813804";
 const secondaryPhone = "+90 554 604 55 82";
 const secondaryTel = "+905546045582";
 const whatsapp = "905337813804";
+const instagramUrl = "https://www.instagram.com/hanedangroup2/";
 const address = "Gülük, Haseki Cd., 38050 Melikgazi/Kayseri";
 const heroImage = "/assets/images/hanedan-arac.jpeg";
 const buildingImage = "/assets/images/hanedan-arac-bina.jpeg";
@@ -273,7 +274,7 @@ function baseSchema() {
       "addressCountry": "TR"
     },
     "areaServed": ["Kayseri", "Melikgazi", "Kocasinan", "Talas", "Hacılar", "İncesu", "Develi", "Bünyan", "Yeşilhisar", "Akkışla", "Felahiye", "Özvatan", "Pınarbaşı", "Sarıoğlan", "Sarız", "Tomarza", "Yahyalı"],
-    "sameAs": []
+    "sameAs": [instagramUrl]
   };
 }
 
@@ -353,7 +354,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
   <div class="floating-actions" aria-label="Hızlı iletişim">
     <a class="float-whatsapp" href="${waLink("Merhaba, Kayseri Hanedan Nakliyat web sitesinden bilgi almak istiyorum.")}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon("whatsapp")}</a>
     <a class="float-call" href="tel:${primaryTel}" aria-label="Telefon">${icon("phoneBooth")}</a>
-    <a class="float-instagram" href="#" aria-label="Instagram">${icon("instagram")}</a>
+    <a class="float-instagram" href="${instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram">${icon("instagram")}</a>
   </div>
   <script src="/assets/js/main.js"></script>
 </body>
@@ -389,6 +390,7 @@ function footerMarkup() {
           <li><a href="tel:${primaryTel}">${primaryPhone}</a></li>
           <li><a href="tel:${secondaryTel}">${secondaryPhone}</a></li>
           <li><a href="${mapsUrl()}" target="_blank" rel="noopener">Yol Tarifi</a></li>
+          <li><a href="${instagramUrl}" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="/iletisim/">Bize Ulaşın</a></li>
         </ul>
       </div>
