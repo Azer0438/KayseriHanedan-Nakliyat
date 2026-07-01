@@ -13,8 +13,42 @@ const instagramUrl = "https://www.instagram.com/hanedangroup2/";
 const googleSearchUrl = "https://www.google.com/search?q=kayserihanedannakliyat";
 const googleMapsUrl = "https://maps.app.goo.gl/2327bkojxRDpjAnv5";
 const address = "Gülük, Haseki Cd. No 7B, 38050 Melikgazi/Kayseri";
-const heroImage = "/assets/images/hanedan-arac.jpeg";
+const heroImage = "/assets/images/hero-slide-1.png";
+const truckImage = "/assets/images/hanedan-arac.jpeg";
 const buildingImage = "/assets/images/hanedan-arac-bina.jpeg";
+const secondTruckImage = "/assets/images/hero-slide-4.jpeg";
+const heroSlides = [
+  {
+    image: heroImage,
+    alt: "Hanedan Nakliyat ev ve ofis taşıma ana görseli",
+    bare: true
+  },
+  {
+    image: truckImage,
+    alt: "Kayseri Hanedan Nakliyat taşıma aracı",
+    label: "Kayseri Hanedan Nakliyat",
+    title: "Kayseri'de Eşyalarınızı Güvenle, Planlı ve Özenli Taşıyoruz",
+    text: "Evden eve nakliyat, asansörlü taşıma, şehir içi ve şehirler arası nakliyat için Kayseri merkezli profesyonel ekip ve hızlı teklif desteği.",
+    stats: [["Kayseri Geneli", "Melikgazi, Kocasinan, Talas"], ["Planlı Taşıma", "Paketleme, söküm, montaj"], ["Hızlı İletişim", "WhatsApp teklif hattı"]]
+  },
+  {
+    image: buildingImage,
+    alt: "Kayseri'de asansörlü ve planlı taşıma hizmeti",
+    label: "Asansörlü Nakliyat",
+    title: "Yüksek Katlarda Hızlı ve Kontrollü Taşıma",
+    text: "Bina yapısı, kat bilgisi ve eşya yoğunluğu önceden analiz edilir; uygun ekipmanla güvenli taşıma planı hazırlanır.",
+    stats: [["Asansörlü Sistem", "Dış cephe taşıma"], ["Uzman Ekip", "Söküm ve montaj"], ["Sigortalı Süreç", "Kontrollü teslimat"]]
+  },
+  {
+    image: secondTruckImage,
+    alt: "Kayseri Hanedan Nakliyat ikinci araç görseli",
+    label: "Kayseri Geneli Nakliyat",
+    title: "Şehir İçi ve Şehirler Arasında Yanınızdayız",
+    text: "Kayseri merkez ve tüm ilçelerde ev, ofis, parça eşya ve şehirler arası nakliyat talepleriniz için hızlı iletişim kuruyoruz.",
+    stats: [["Ev ve Ofis", "Taşıma planı"], ["Parça Eşya", "Hızlı çözüm"], ["7/24 Hat", "Teklif desteği"]]
+  }
+];
+const galleryVideos = Array.from({ length: 9 }, (_, index) => `/assets/media/gallery-video-${index + 1}.mp4`);
 
 const services = [
   {
@@ -482,24 +516,24 @@ function homePage() {
     ["Asansörlü nakliyat hizmetiniz var mı?", "Evet. Bina ve cephe uygunluğuna göre dış cephe asansörüyle taşıma planlanabilir."]
   ];
   const schema = [faqSchema(faqs)];
+  const heroSlidesMarkup = heroSlides.map((slide, index) => `
+    <article class="hero-slide${index === 0 ? " is-active" : ""}${slide.bare ? " bare-slide" : ""}" aria-hidden="${index === 0 ? "false" : "true"}">
+      <img src="${slide.image}" alt="${slide.alt}"${index === 0 ? " fetchpriority=\"high\"" : ""}>
+      ${slide.bare ? "" : `<div class="container hero-content">
+        <span class="hero-label">${slide.label}</span>
+        <h1>${slide.title}</h1>
+        <p>${slide.text}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/teklif-al/">Teklif Al</a>
+          <a class="btn btn-outline" href="tel:${primaryTel}">${primaryPhone}</a>
+        </div>
+        <div class="hero-stats">${slide.stats.map(([title, text]) => `<span><strong>${title}</strong> ${text}</span>`).join("")}</div>
+      </div>`}
+    </article>`).join("");
   const content = `
-  <section class="hero">
-    <picture><img src="${heroImage}" alt="Kayseri Hanedan Nakliyat ev ve ofis taşıma aracı" fetchpriority="high"></picture>
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <span class="hero-label">Kayseri Hanedan Nakliyat</span>
-      <h1>Kayseri'de Eşyalarınızı Güvenle, Planlı ve Özenli Taşıyoruz</h1>
-      <p>Evden eve nakliyat, asansörlü taşıma, şehir içi ve şehirler arası nakliyat için Kayseri merkezli profesyonel ekip ve hızlı teklif desteği.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/teklif-al/">Teklif Al</a>
-        <a class="btn btn-outline" href="tel:${primaryTel}">${primaryPhone}</a>
-      </div>
-      <div class="hero-stats">
-        <span><strong>Kayseri Geneli</strong> Melikgazi, Kocasinan, Talas</span>
-        <span><strong>Planlı Taşıma</strong> Paketleme, söküm, montaj</span>
-        <span><strong>Hızlı İletişim</strong> WhatsApp teklif hattı</span>
-      </div>
-    </div>
+  <section class="hero hero-carousel" data-hero-carousel aria-label="Hanedan Nakliyat ana görsel geçişleri">
+    ${heroSlidesMarkup}
+    <div class="hero-dots" aria-label="Ana görsel seçimi">${heroSlides.map((_, index) => `<button type="button" class="${index === 0 ? "is-active" : ""}" aria-label="${index + 1}. görsele geç"></button>`).join("")}</div>
   </section>
 
   <section class="section services-showcase pattern-bg">
@@ -601,9 +635,9 @@ function homePage() {
         </div>
       </div>
       <div class="process-line">
-        <article><span>1</span><img src="${heroImage}" alt="Keşif ve planlama için Hanedan Nakliyat aracı"><h3>Keşif ve Planlama</h3><p>Eşya miktarı, bina yapısı, kat bilgisi ve mesafe analiz edilir.</p></article>
+        <article><span>1</span><img src="${truckImage}" alt="Keşif ve planlama için Hanedan Nakliyat aracı"><h3>Keşif ve Planlama</h3><p>Eşya miktarı, bina yapısı, kat bilgisi ve mesafe analiz edilir.</p></article>
         <article><span>2</span><img src="${buildingImage}" alt="Profesyonel taşıma ve araç yerleşim süreci"><h3>Profesyonel Taşıma</h3><p>Eşyalar türüne uygun paketlenir, araç içi yerleşim kontrollü yapılır.</p></article>
-        <article><span>3</span><img src="${heroImage}" alt="Güvenli teslimat için nakliye aracı"><h3>Güvenli Teslimat</h3><p>Eşyalar yeni adresinize teslim edilir, montaj ve yerleşim desteği sağlanır.</p></article>
+        <article><span>3</span><img src="${truckImage}" alt="Güvenli teslimat için nakliye aracı"><h3>Güvenli Teslimat</h3><p>Eşyalar yeni adresinize teslim edilir, montaj ve yerleşim desteği sağlanır.</p></article>
       </div>
     </div>
   </section>
@@ -828,15 +862,21 @@ function corporatePage(slug, title, body) {
 }
 
 function galleryPage() {
+  const imageCards = [
+    [heroImage, "Hanedan Nakliyat ana gorseli"],
+    [truckImage, "Hanedan Nakliyat arac gorseli"],
+    [buildingImage, "Kayseri Hanedan Nakliyat bina onu arac gorseli"],
+    [secondTruckImage, "Kayseri Hanedan Nakliyat ikinci arac gorseli"]
+  ].map(([src, alt], index) => `<a href="${src}" class="gallery-item${index === 1 ? " tall" : ""}"><img src="${src}" alt="${alt}"></a>`).join("");
+  const videoCards = galleryVideos.map((src, index) => `<div class="video-card"><video src="${src}" controls muted playsinline preload="metadata"></video><h2>Hanedan Nakliyat Video ${index + 1}</h2><p>Tasima surecinden arac ve ekip goruntuleri.</p></div>`).join("");
   const content = `
   <section class="page-hero compact-hero">
     <div class="container">${breadcrumb([["Galeri", "/galeri/"]])}<span class="kicker">Galeri</span><h1>Kayseri Hanedan Nakliyat Galeri</h1><p>Araç, ekipman ve taşıma süreçlerimizden görseller.</p></div>
   </section>
   <section class="section">
     <div class="container gallery-grid">
-      <a href="${heroImage}" class="gallery-item"><img src="${heroImage}" alt="Hanedan Nakliyat araç görseli"></a>
-      <a href="${buildingImage}" class="gallery-item tall"><img src="${buildingImage}" alt="Kayseri Hanedan Nakliyat bina önü araç görseli"></a>
-      <div class="video-card"><video src="/assets/media/hanedan-video.mp4" controls preload="metadata"></video><h2>Hanedan Nakliyat Video</h2><p>Taşıma sürecinden araç ve ekip görüntüleri.</p></div>
+      ${imageCards}
+      ${videoCards}
     </div>
   </section>`;
   return pageLayout({
@@ -983,11 +1023,20 @@ body.menu-open { overflow: hidden; }
 .btn-dark:hover { background: var(--deep-2); transform: translateY(-2px); }
 .btn-outline { color: #fff; border-color: rgba(255,255,255,.75); background: rgba(0,0,0,.2); }
 .btn-light { background: #fff; color: var(--red); }
-.hero { min-height: 760px; position: relative; display: grid; align-items: center; color: #fff; overflow: hidden; }
+.hero { min-height: 760px; position: relative; display: grid; align-items: center; color: #fff; overflow: hidden; background: #f7f8f9; }
 .hero picture, .hero picture img, .hero-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero picture img { object-fit: cover; object-position: center; }
 .hero-overlay { background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.34) 52%, rgba(0,0,0,.12)); }
-.hero-content { position: relative; padding-top: 70px; }
+.hero-carousel { min-height: min(760px, calc(100vh - 120px)); aspect-ratio: 1680 / 944; max-height: 820px; }
+.hero-slide { position: absolute; inset: 0; display: grid; align-items: center; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s ease; }
+.hero-slide.is-active { opacity: 1; visibility: visible; z-index: 1; }
+.hero-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-slide:not(.bare-slide)::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(0,0,0,.74), rgba(0,0,0,.34) 52%, rgba(0,0,0,.08)); }
+.hero-slide.bare-slide img { object-position: center; }
+.hero-content { position: relative; z-index: 2; padding-top: 70px; }
+.hero-dots { position: absolute; left: 50%; bottom: 24px; z-index: 3; display: flex; gap: 10px; transform: translateX(-50%); }
+.hero-dots button { width: 12px; height: 12px; padding: 0; border-radius: 999px; border: 1px solid rgba(255,255,255,.75); background: rgba(255,255,255,.58); cursor: pointer; transition: .2s ease; }
+.hero-dots button.is-active { width: 34px; border-color: var(--red); background: var(--red); }
 .hero-label, .kicker { display: inline-flex; align-items: center; border-radius: 999px; background: var(--red); color: #fff; font-size: 13px; font-weight: 900; padding: 7px 17px; }
 .hero h1 { max-width: 760px; margin: 22px 0 16px; font-size: clamp(42px, 6vw, 76px); line-height: 1.02; letter-spacing: 0; overflow-wrap: break-word; }
 .hero p { max-width: 660px; font-size: 20px; color: rgba(255,255,255,.9); }
@@ -1168,6 +1217,9 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
   .brand { min-width: auto; }
   .brand-logo { width: 250px; }
   .hero { min-height: 720px; }
+  .hero-carousel { min-height: 560px; aspect-ratio: auto; max-height: none; }
+  .hero-slide { align-items: start; }
+  .hero-slide.bare-slide img { object-position: left center; }
   .hero-overlay { background: linear-gradient(90deg, rgba(0,0,0,.78), rgba(0,0,0,.48)); }
   .hero-content { padding-top: 40px; }
   .hero p { font-size: 17px; }
@@ -1186,15 +1238,20 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 }
 @media (max-width: 540px) {
   .container { width: calc(100% - 28px); max-width: 100%; }
-  .site-header .container { width: calc(100% - 28px); }
+  .site-header .container { width: 100%; padding-left: 14px; padding-right: 14px; }
   .topbar { display: none; }
-  .nav-inner { min-height: 76px; gap: 14px; }
-  .brand-logo { width: 214px; }
-  .menu-toggle { width: 48px; height: 48px; padding: 11px; }
+  .nav-inner { min-height: 76px; display: grid; grid-template-columns: minmax(0, 1fr) 48px; gap: 14px; justify-content: stretch; }
+  .brand { flex: 0 1 auto; }
+  .brand-logo { width: min(214px, calc(100vw - 96px)); }
+  .main-nav { display: none !important; }
+  .header-actions { min-width: 0; width: 48px; margin-left: 0; justify-content: end; }
+  .menu-toggle { display: grid !important; flex: 0 0 48px; width: 48px; height: 48px; padding: 11px; background: #050505; border: 2px solid #f7c84a; border-radius: 4px; }
   .menu-toggle span { height: 2px; margin: 6px 0; }
   .mobile-nav { padding: 18px 34px 44px; }
   .mobile-panel-logo img { width: 220px; }
-  .hero { min-height: 640px; align-items: start; }
+  .hero { min-height: 460px; align-items: start; }
+  .hero-carousel { min-height: 460px; aspect-ratio: auto; }
+  .hero-slide.bare-slide img { object-position: left center; }
   .hero-content { padding-top: 28px; max-width: 100%; }
   .hero-label { font-size: 12px; padding: 6px 14px; }
   .hero h1 { width: min(100%, 350px); max-width: 100%; margin: 18px 0 10px; padding: 10px 12px; background: rgba(0,0,0,.62); font-size: 25px; line-height: 1.18; white-space: normal; overflow-wrap: anywhere; word-break: normal; }
@@ -1202,6 +1259,7 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
   .hero-actions { gap: 10px; margin-top: 24px; }
   .hero-actions .btn { min-height: 46px; padding: 0 18px; }
   .hero-stats { display: none; }
+  .hero-dots { bottom: 14px; }
   .section-head p { max-width: calc(100vw - 32px); }
   .section-head { max-width: calc(100vw - 32px); }
   .section-head h2, .split-copy h2, .quote-grid h2, .process-head h2, .page-hero h1 { font-size: 26px; line-height: 1.2; max-width: calc(100vw - 32px); white-space: normal; word-break: break-word; }
@@ -1270,6 +1328,32 @@ if (menuToggle && mobileNav) {
     if (event.key === "Escape") setMenuOpen(false);
   });
 }
+
+document.querySelectorAll("[data-hero-carousel]").forEach((carousel) => {
+  const slides = [...carousel.querySelectorAll(".hero-slide")];
+  const dots = [...carousel.querySelectorAll(".hero-dots button")];
+  if (slides.length < 2) return;
+
+  let active = 0;
+  const show = (index) => {
+    active = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === active;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+    dots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
+  };
+
+  let timer = setInterval(() => show(active + 1), 5000);
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      clearInterval(timer);
+      show(index);
+      timer = setInterval(() => show(active + 1), 5000);
+    });
+  });
+});
 
 document.querySelectorAll(".quote-form").forEach((form) => {
   form.addEventListener("submit", (event) => {

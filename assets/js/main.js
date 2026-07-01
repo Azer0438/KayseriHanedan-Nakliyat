@@ -55,6 +55,32 @@ if (menuToggle && mobileNav) {
   });
 }
 
+document.querySelectorAll("[data-hero-carousel]").forEach((carousel) => {
+  const slides = [...carousel.querySelectorAll(".hero-slide")];
+  const dots = [...carousel.querySelectorAll(".hero-dots button")];
+  if (slides.length < 2) return;
+
+  let active = 0;
+  const show = (index) => {
+    active = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === active;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+    dots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
+  };
+
+  let timer = setInterval(() => show(active + 1), 5000);
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      clearInterval(timer);
+      show(index);
+      timer = setInterval(() => show(active + 1), 5000);
+    });
+  });
+});
+
 document.querySelectorAll(".quote-form").forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
