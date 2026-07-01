@@ -188,6 +188,10 @@ body.menu-open { overflow: hidden; }
 .page-hero.service-hero::after { width: 42%; }
 .page-hero.compact-hero::after { width: 50%; opacity: .96; }
 @media (max-width: 900px) { .page-hero::after, .compact-hero::after { display: none; } }
+
+/* Left-side overlay to ensure text contrast over hero */
+.page-hero::before, .compact-hero::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 58%; z-index: 1; background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(9,44,51,0.06)); pointer-events: none; border-radius: 12px 0 0 12px; }
+.page-hero .container, .compact-hero .container { position: relative; z-index: 2; }
 .entry-footer { display:flex; gap:18px; align-items:center; margin-top:22px; }
 .btn-wide { display:inline-block; min-width:200px; text-align:center; }
 
