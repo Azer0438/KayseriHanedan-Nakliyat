@@ -57,7 +57,8 @@ if (menuToggle && mobileNav) {
 
 document.querySelectorAll("[data-hero-carousel]").forEach((carousel) => {
   const slides = [...carousel.querySelectorAll(".hero-slide")];
-  const dots = [...carousel.querySelectorAll(".hero-dots button")];
+  const dotsContainer = carousel.closest('.hero') ? carousel.closest('.hero').querySelector('.hero-dots') : carousel.querySelector('.hero-dots');
+  const dots = dotsContainer ? [...dotsContainer.querySelectorAll('button')] : [];
   if (slides.length < 2) return;
 
   let active = 0;
@@ -70,6 +71,9 @@ document.querySelectorAll("[data-hero-carousel]").forEach((carousel) => {
     });
     dots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
   };
+
+  // initialize display
+  show(active);
 
   let timer = setInterval(() => show(active + 1), 5000);
   dots.forEach((dot, index) => {
