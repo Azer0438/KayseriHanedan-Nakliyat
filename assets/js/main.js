@@ -22,6 +22,7 @@ if (menuToggle && mobileNav) {
   mobileNav.querySelectorAll(".has-dropdown > a").forEach((link) => {
     link.setAttribute("aria-expanded", "false");
     link.addEventListener("click", (event) => {
+      if (!event.target.closest(".dropdown-toggle")) return;
       event.preventDefault();
       const item = link.parentElement;
       const isOpen = item.classList.toggle("open");
