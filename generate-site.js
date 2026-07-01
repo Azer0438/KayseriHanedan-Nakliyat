@@ -11,6 +11,7 @@ const secondaryTel = "+905546045582";
 const whatsapp = "905337813804";
 const address = "Gülük, Haseki Cd., 38050 Melikgazi/Kayseri";
 const heroImage = "/assets/images/hanedan-arac.jpeg";
+const buildingImage = "/assets/images/hanedan-arac-bina.jpeg";
 
 const services = [
   {
@@ -494,7 +495,7 @@ function homePage() {
   <section class="section about-split">
     <div class="container split-grid">
       <div class="image-stack">
-        <img src="${heroImage}" alt="Hanedan Nakliyat araç üzeri firma logosu ve nakliye aracı">
+        <img src="${buildingImage}" alt="Kayseri Hanedan Nakliyat bina önü taşıma aracı">
         <div class="experience-badge"><strong>HANEDAN</strong><span>Ev Ofis Taşıma</span></div>
       </div>
       <div class="split-copy">
@@ -516,7 +517,7 @@ function homePage() {
   </section>
 
   <section class="why-band">
-    <div class="why-bg"><img src="${heroImage}" alt="Kayseri Hanedan Nakliyat taşıma aracı"></div>
+    <div class="why-bg"><img src="${buildingImage}" alt="Kayseri Hanedan Nakliyat şehir içi taşıma aracı"></div>
     <div class="container why-content">
       <div class="why-tabs">
         <span>Uzman Kadro</span>
@@ -583,7 +584,7 @@ function homePage() {
       </div>
       <div class="process-line">
         <article><span>1</span><img src="${heroImage}" alt="Keşif ve planlama için Hanedan Nakliyat aracı"><h3>Keşif ve Planlama</h3><p>Eşya miktarı, bina yapısı, kat bilgisi ve mesafe analiz edilir.</p></article>
-        <article><span>2</span><img src="${heroImage}" alt="Profesyonel taşıma ve yükleme süreci"><h3>Profesyonel Taşıma</h3><p>Eşyalar türüne uygun paketlenir, araç içi yerleşim kontrollü yapılır.</p></article>
+        <article><span>2</span><img src="${buildingImage}" alt="Profesyonel taşıma ve araç yerleşim süreci"><h3>Profesyonel Taşıma</h3><p>Eşyalar türüne uygun paketlenir, araç içi yerleşim kontrollü yapılır.</p></article>
         <article><span>3</span><img src="${heroImage}" alt="Güvenli teslimat için nakliye aracı"><h3>Güvenli Teslimat</h3><p>Eşyalar yeni adresinize teslim edilir, montaj ve yerleşim desteği sağlanır.</p></article>
       </div>
     </div>
@@ -688,7 +689,7 @@ function servicePage(service) {
         </ol>
       </article>
       <aside class="detail-aside">
-        <img src="${heroImage}" alt="${service.title} için Kayseri Hanedan Nakliyat aracı">
+        <img src="${buildingImage}" alt="${service.title} için Kayseri Hanedan Nakliyat aracı">
         <div class="aside-card">
           <h2>Hızlı Teklif</h2>
           <p>${service.shortTitle} için adres ve kat bilgilerinizi paylaşın, size uygun planlamayı yapalım.</p>
@@ -764,7 +765,7 @@ function districtPage([slug, title, note]) {
         <div class="mini-service-list">${services.slice(0, 6).map((service) => `<a href="/hizmetler/${service.slug}/">${service.shortTitle}</a>`).join("")}</div>
       </article>
       <aside class="detail-aside">
-        <img src="${heroImage}" alt="${title} evden eve nakliyat için Hanedan Nakliyat aracı">
+        <img src="${buildingImage}" alt="${title} evden eve nakliyat için Hanedan Nakliyat aracı">
         <div class="aside-card">
           <h2>${title} için Hızlı Teklif</h2>
           <p>Taşıma adresinizi, kat bilgisini ve tarih tercihinizi paylaşın.</p>
@@ -816,7 +817,7 @@ function galleryPage() {
   <section class="section">
     <div class="container gallery-grid">
       <a href="${heroImage}" class="gallery-item"><img src="${heroImage}" alt="Hanedan Nakliyat araç görseli"></a>
-      <a href="${heroImage}" class="gallery-item tall"><img src="${heroImage}" alt="Kayseri Hanedan Nakliyat ev ofis taşıma aracı"></a>
+      <a href="${buildingImage}" class="gallery-item tall"><img src="${buildingImage}" alt="Kayseri Hanedan Nakliyat bina önü araç görseli"></a>
       <div class="video-card"><video src="/assets/media/hanedan-video.mp4" controls preload="metadata"></video><h2>Hanedan Nakliyat Video</h2><p>Taşıma sürecinden araç ve ekip görüntüleri.</p></div>
     </div>
   </section>`;
