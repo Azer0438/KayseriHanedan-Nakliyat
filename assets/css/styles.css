@@ -182,6 +182,12 @@ body.menu-open { overflow: hidden; }
 .detail-grid { gap: 40px; }
 .contact-grid { gap: 28px; }
 .page-hero .container { max-width: 1200px; }
+
+/* Decorative right-side hero image for inner pages to match reference */
+.page-hero::after, .compact-hero::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 48%; background: url('/assets/images/hero-slide-1.png') center/cover no-repeat; z-index: 1; border-radius: 0 12px 12px 0; box-shadow: inset -40px 0 80px rgba(9,44,51,.06); pointer-events: none; }
+.page-hero.service-hero::after { width: 42%; }
+.page-hero.compact-hero::after { width: 50%; opacity: .96; }
+@media (max-width: 900px) { .page-hero::after, .compact-hero::after { display: none; } }
 .entry-footer { display:flex; gap:18px; align-items:center; margin-top:22px; }
 .btn-wide { display:inline-block; min-width:200px; text-align:center; }
 
