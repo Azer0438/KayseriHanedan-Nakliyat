@@ -346,7 +346,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
           <ul>${navMarkup()}</ul>
         </nav>
         <div class="header-actions">
-          <a class="call-pill" href="tel:${secondaryTel}"><span class="call-icon">${icon("phone")}</span><span>Randevu - Bilgi</span><strong>${secondaryPhone}</strong></a>
+          <a class="call-pill" href="tel:${primaryTel}"><span class="call-icon">${icon("phone")}</span><span>Randevu - Bilgi</span><strong>${primaryPhone}</strong><strong>${secondaryPhone}</strong></a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç"><span></span><span></span><span></span></button>
         </div>
       </div>
@@ -922,7 +922,7 @@ body { margin: 0; color: var(--ink); font-family: Inter, "Segoe UI", Arial, sans
 img, video { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
-.site-header .container { width: min(1500px, calc(100% - 56px)); }
+.site-header .container { width: min(1840px, calc(100% - 40px)); }
 .skip-link { position: absolute; left: -999px; top: 12px; background: var(--red); color: #fff; padding: 10px 14px; z-index: 999; }
 .skip-link:focus { left: 12px; }
 svg { width: 1.15em; height: 1.15em; }
@@ -936,11 +936,11 @@ svg { width: 1.15em; height: 1.15em; }
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--header); box-shadow: 0 14px 34px rgba(75, 5, 12, .28); }
 .nav-shell { background: transparent; color: #fff; }
 .nav-inner { min-height: 104px; display: flex; align-items: stretch; gap: 0; }
-.brand { display: inline-flex; align-items: center; min-width: 430px; padding-right: 48px; border-right: 1px solid rgba(255,255,255,.18); }
-.brand-logo { width: 320px; height: auto; display: block; }
-.main-nav { flex: 1; display: flex; align-items: center; padding: 0 42px; }
+.brand { display: inline-flex; align-items: center; min-width: 470px; padding-right: 58px; border-right: 1px solid rgba(255,255,255,.18); }
+.brand-logo { width: 330px; height: auto; display: block; }
+.main-nav { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 58px; }
 .main-nav ul, .mobile-nav ul { list-style: none; padding: 0; margin: 0; }
-.main-nav > ul { display: flex; justify-content: flex-end; align-items: center; gap: 24px; width: 100%; }
+.main-nav > ul { display: flex; justify-content: center; align-items: center; gap: 34px; width: 100%; }
 .main-nav a { display: flex; align-items: center; gap: 7px; padding: 40px 0; font-size: 14px; font-weight: 900; text-transform: uppercase; line-height: 1; }
 .main-nav li { position: relative; }
 .main-nav li:hover > a { color: #ffe3e7; }
@@ -948,12 +948,12 @@ svg { width: 1.15em; height: 1.15em; }
 .has-dropdown:hover > ul { opacity: 1; visibility: visible; transform: translateY(0); }
 .has-dropdown > ul a { color: #5d6c71; padding: 11px 26px; white-space: nowrap; }
 .has-dropdown > ul a:hover { color: var(--red); background: var(--red-soft); }
-.header-actions { display: flex; align-items: center; gap: 22px; min-width: 312px; justify-content: flex-end; border-left: 1px solid rgba(255,255,255,.18); padding-left: 32px; }
-.call-pill { display: grid; grid-template-columns: 48px 1fr; gap: 2px 12px; align-items: center; min-width: 196px; }
-.call-icon { grid-row: span 2; width: 48px; height: 48px; border-radius: 50%; display: grid !important; place-items: center; background: #0c0c0c; color: #fff; box-shadow: inset 0 0 0 5px rgba(255,255,255,.18); }
+.header-actions { display: flex; align-items: center; gap: 28px; min-width: 400px; justify-content: flex-end; border-left: 1px solid rgba(255,255,255,.18); padding-left: 42px; }
+.call-pill { display: grid; grid-template-columns: 48px 1fr; gap: 2px 12px; align-items: center; min-width: 250px; }
+.call-icon { grid-row: span 3; width: 48px; height: 48px; border-radius: 50%; display: grid !important; place-items: center; background: #0c0c0c; color: #fff; box-shadow: inset 0 0 0 5px rgba(255,255,255,.18); }
 .call-icon svg { width: 22px; height: 22px; }
 .call-pill span:not(.call-icon) { font-size: 12px; opacity: .88; line-height: 1; }
-.call-pill strong { font-size: 19px; line-height: 1.05; }
+.call-pill strong { font-size: 18px; line-height: 1.05; }
 .menu-toggle { display: grid; place-content: center; width: 76px; height: 76px; border: 0; background: #050505; padding: 0; cursor: pointer; }
 .menu-toggle:focus { outline: none; }
 .menu-toggle:focus-visible { outline: 2px solid rgba(255,255,255,.72); outline-offset: 3px; }
@@ -1124,28 +1124,28 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 .float-call { background: #1e86cf; }
 .float-instagram { background: linear-gradient(145deg, #d800ff, #8f19ff); }
 @media (max-width: 1600px) {
-  .site-header .container { width: min(1500px, calc(100% - 38px)); }
-  .brand { min-width: 350px; padding-right: 30px; }
-  .brand-logo { width: 285px; }
-  .main-nav { padding: 0 28px; }
-  .main-nav > ul { gap: 16px; }
-  .header-actions { min-width: 266px; gap: 14px; padding-left: 24px; }
-  .call-pill { min-width: 174px; grid-template-columns: 42px 1fr; gap: 2px 10px; }
+  .site-header .container { width: calc(100% - 36px); }
+  .brand { min-width: 330px; padding-right: 30px; }
+  .brand-logo { width: 280px; }
+  .main-nav { padding: 0 34px; }
+  .main-nav > ul { gap: 22px; }
+  .header-actions { min-width: 342px; gap: 18px; padding-left: 26px; }
+  .call-pill { min-width: 244px; grid-template-columns: 42px 1fr; gap: 2px 10px; }
   .call-icon { width: 42px; height: 42px; box-shadow: inset 0 0 0 4px rgba(255,255,255,.18); }
   .call-icon svg { width: 20px; height: 20px; }
-  .call-pill strong { font-size: 17px; }
+  .call-pill strong { font-size: 16px; }
   .menu-toggle { width: 62px; height: 62px; }
 }
 @media (max-width: 1280px) {
-  .brand { min-width: 300px; padding-right: 22px; }
-  .brand-logo { width: 250px; }
-  .main-nav { padding: 0 18px; }
-  .main-nav > ul { gap: 12px; }
+  .brand { min-width: 285px; padding-right: 20px; }
+  .brand-logo { width: 245px; }
+  .main-nav { padding: 0 20px; }
+  .main-nav > ul { gap: 15px; }
   .main-nav a { font-size: 13px; }
-  .header-actions { min-width: 230px; padding-left: 18px; }
+  .header-actions { min-width: 270px; gap: 12px; padding-left: 18px; }
   .call-icon { display: none !important; }
-  .call-pill { min-width: 140px; grid-template-columns: 1fr; }
-  .call-pill strong { font-size: 16px; }
+  .call-pill { min-width: 186px; grid-template-columns: 1fr; }
+  .call-pill strong { font-size: 15px; }
   .menu-toggle { width: 58px; height: 58px; }
 }
 @media (max-width: 1100px) {
