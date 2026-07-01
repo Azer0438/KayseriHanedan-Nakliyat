@@ -137,11 +137,11 @@ body.menu-open { overflow: hidden; }
 .section-head h2, .split-copy h2, .quote-grid h2, .process-head h2, .page-hero h1 { font-size: clamp(32px, 4vw, 52px); line-height: 1.12; margin: 16px 0 14px; letter-spacing: 0; overflow-wrap: break-word; }
 .section-head p, .split-copy p, .quote-grid p, .page-hero p { color: var(--muted); font-size: 17px; }
 .service-slider { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-.service-card, .district-card { background: #fff; padding: 34px; border-radius: var(--radius); box-shadow: var(--shadow); border-bottom: 4px solid #b7eef3; min-height: 280px; }
-.service-icon { width: 70px; height: 70px; display: grid; place-items: center; color: var(--red); background: var(--red-soft); border: 1px dashed var(--red); border-radius: 50%; margin-bottom: 22px; font-size: 30px; }
-.service-card h3, .district-card h2 { margin: 0 0 12px; font-size: 23px; line-height: 1.25; }
-.service-card p, .district-card p { color: var(--muted); }
-.service-card a, .district-card a { color: var(--red); font-weight: 900; }
+.service-card, .district-card { background: #fff; padding: 28px; border-radius: 12px; box-shadow: 0 14px 45px rgba(9,44,51,.06); border: 1px solid rgba(10,20,22,.04); min-height: 240px; display:flex; flex-direction:column; gap:12px; }
+.service-icon { width: 64px; height: 64px; display: grid; place-items: center; color: var(--red); background: rgba(172,10,21,.06); border-radius: 12px; margin-bottom: 8px; font-size: 28px; }
+.service-card h3, .district-card h2 { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
+.service-card p, .district-card p { color: var(--muted); flex:1 1 auto; }
+.service-card a, .district-card a { color: var(--red); font-weight: 800; margin-top: 10px; display:inline-block; }
 .center { text-align: center; }
 .mt-40 { margin-top: 40px; }
 .split-grid, .quote-grid, .contact-grid, .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
