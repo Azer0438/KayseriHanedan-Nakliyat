@@ -95,8 +95,8 @@ body.menu-open { overflow: hidden; }
 .hero-dots { position: absolute; left: 50%; bottom: 24px; z-index: 3; display: flex; gap: 10px; transform: translateX(-50%); }
 .hero-dots button { width: 12px; height: 12px; padding: 0; border-radius: 999px; border: 1px solid rgba(255,255,255,.75); background: rgba(255,255,255,.58); cursor: pointer; transition: .2s ease; }
 .hero-dots button.is-active { width: 34px; border-color: var(--red); background: var(--red); }
-.hero-quick-actions { background: #fff; padding: 18px 0; box-shadow: 0 10px 30px rgba(5, 21, 24, .08); }
-.hero-quick-actions .container { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.hero-quick-actions { background: transparent; padding: 18px 0; box-shadow: none; margin-top: -60px; position: relative; z-index: 2; }
+.hero-quick-actions .container { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: center; }
 .hero-quick-actions .btn { min-width: 220px; min-height: 54px; }
 .hero-quick-actions .phone-action { color: var(--ink); border: 1px solid rgba(181,18,32,.28); background: #fff; box-shadow: 0 8px 22px rgba(5, 21, 24, .06); }
 .hero-quick-actions .phone-action:hover { color: var(--red); border-color: var(--red); transform: translateY(-2px); }
