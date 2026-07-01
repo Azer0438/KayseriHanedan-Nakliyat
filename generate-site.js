@@ -10,6 +10,8 @@ const secondaryPhone = "+90 554 604 55 82";
 const secondaryTel = "+905546045582";
 const whatsapp = "905337813804";
 const instagramUrl = "https://www.instagram.com/hanedangroup2/";
+const googleSearchUrl = "https://www.google.com/search?q=kayserihanedannakliyat";
+const googleMapsUrl = "https://maps.app.goo.gl/2327bkojxRDpjAnv5";
 const address = "Gülük, Haseki Cd., 38050 Melikgazi/Kayseri";
 const heroImage = "/assets/images/hanedan-arac.jpeg";
 const buildingImage = "/assets/images/hanedan-arac-bina.jpeg";
@@ -332,8 +334,8 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
         <a href="tel:${primaryTel}">${icon("phone")} ${primaryPhone}</a>
         <div class="topbar-social" aria-label="Sosyal bağlantılar">
           <a href="${instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram">${icon("instagram")}</a>
-          <a href="${mapsUrl()}" target="_blank" rel="noopener" aria-label="Google işletme">G</a>
-          <a href="/iletisim/" aria-label="İletişim">${icon("location")}</a>
+          <a href="${googleSearchUrl}" target="_blank" rel="noopener" aria-label="Google araması">G</a>
+          <a href="${mapsUrl()}" target="_blank" rel="noopener" aria-label="Google harita konumu">${icon("location")}</a>
         </div>
       </div>
     </div>
@@ -426,7 +428,7 @@ function waLink(message) {
 }
 
 function mapsUrl() {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  return googleMapsUrl;
 }
 
 function sectionIntro(kicker, title, text) {
