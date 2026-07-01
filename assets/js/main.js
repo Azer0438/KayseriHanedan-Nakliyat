@@ -69,22 +69,7 @@ document.querySelectorAll("[data-hero-carousel]").forEach((carousel) => {
       slide.setAttribute("aria-hidden", String(!isActive));
     });
     dots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
-    // Sync hero-right background (if present) with the active slide image
-    try {
-      const heroSection = carousel.closest('.hero');
-      const heroRight = heroSection ? heroSection.querySelector('.hero-right') : null;
-      const img = slides[active].querySelector('img');
-      const src = img ? img.getAttribute('src') : '';
-      if (heroRight && src) {
-        heroRight.style.backgroundImage = `url(${src})`;
-      }
-    } catch (e) {
-      // no-op on older browsers or unexpected structure
-    }
   };
-
-  // initialize display to current active
-  show(active);
 
   let timer = setInterval(() => show(active + 1), 5000);
   dots.forEach((dot, index) => {
