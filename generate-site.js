@@ -1119,11 +1119,21 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 @media (max-width: 540px) {
   .container { width: calc(100% - 28px); max-width: 100%; }
   .site-header .container { width: calc(100% - 28px); }
+  .topbar { font-size: 12px; }
+  .topbar-inner { gap: 4px; padding: 8px 0; }
   .nav-inner { gap: 14px; }
   .brand-logo { width: 190px; }
   .menu-toggle { width: 52px; height: 52px; padding: 14px; }
-  .hero h1 { font-size: 28px; line-height: 1.14; max-width: calc(100vw - 32px); white-space: normal; word-break: break-word; }
-  .hero p, .section-head p { max-width: calc(100vw - 32px); }
+  .hero { min-height: 720px; align-items: start; }
+  .hero-content { padding-top: 30px; max-width: 100%; }
+  .hero-label { font-size: 12px; padding: 6px 14px; }
+  .hero h1 { width: min(100%, 340px); max-width: 100%; font-size: 26px; line-height: 1.18; white-space: normal; overflow-wrap: anywhere; word-break: normal; }
+  .hero p { width: min(100%, 340px); max-width: 100%; font-size: 16px; line-height: 1.55; }
+  .hero-actions { gap: 10px; margin-top: 24px; }
+  .hero-actions .btn { min-height: 46px; padding: 0 18px; }
+  .hero-stats { width: min(100%, 340px); gap: 10px; margin-top: 28px; }
+  .hero-stats span { padding: 14px 16px; }
+  .section-head p { max-width: calc(100vw - 32px); }
   .section-head { max-width: calc(100vw - 32px); }
   .section-head h2, .split-copy h2, .quote-grid h2, .process-head h2, .page-hero h1 { font-size: 26px; line-height: 1.2; max-width: calc(100vw - 32px); white-space: normal; word-break: break-word; }
   .hero-stats, .process-line { grid-template-columns: 1fr; }
