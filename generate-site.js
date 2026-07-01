@@ -234,7 +234,8 @@ function icon(name) {
     instagram: '<rect x="5" y="5" width="14" height="14" rx="4"/><circle cx="12" cy="12" r="3"/><path d="M16.4 7.8h.1"/>',
     check: '<path d="m20 6-11 11-5-5"/>',
     location: '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
-    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4.5-4.5"/>'
   };
   return `<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icons[name] || icons.box}</svg>`;
 }
@@ -339,10 +340,18 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
         </nav>
         <div class="header-actions">
           <a class="call-pill" href="tel:${secondaryTel}"><span>Randevu / Bilgi</span><strong>${secondaryPhone}</strong></a>
-          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç"><span></span><span></span><span></span></button>
         </div>
       </div>
       <nav class="mobile-nav" id="mobileNav" aria-label="Mobil menü">
+        <div class="mobile-panel-head">
+          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa"><img src="/assets/images/logo.png" alt="${brand}" width="1110" height="312"></a>
+          <button class="mobile-close" type="button" aria-label="Menüyü kapat">×</button>
+        </div>
+        <div class="mobile-search" role="search">
+          <input type="search" placeholder="Arama" aria-label="Mobil menüde ara">
+          ${icon("search")}
+        </div>
         <ul>${navMarkup()}</ul>
       </nav>
     </div>
@@ -932,9 +941,28 @@ svg { width: 1.15em; height: 1.15em; }
 .call-pill { display: grid; gap: 2px; }
 .call-pill span { font-size: 12px; opacity: .85; }
 .call-pill strong { font-size: 18px; line-height: 1; }
-.menu-toggle { display: none; width: 58px; height: 58px; border: 0; background: #101010; padding: 16px; cursor: pointer; }
+.menu-toggle { display: none; width: 58px; height: 58px; border: 0; background: transparent; padding: 16px; cursor: pointer; }
+.menu-toggle:focus { outline: none; }
+.menu-toggle:focus-visible { outline: 2px solid rgba(255,255,255,.72); outline-offset: 3px; }
 .menu-toggle span { display: block; height: 2px; margin: 6px 0; background: #fff; }
-.mobile-nav { display: none; background: #fff; color: var(--ink); }
+.mobile-nav { display: none; position: fixed; inset: 0; z-index: 120; background: #fff; color: var(--ink); overflow-y: auto; padding: 24px 32px 44px; }
+.mobile-nav.open { display: block; }
+body.menu-open { overflow: hidden; }
+.mobile-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+.mobile-panel-logo img { width: 230px; height: auto; }
+.mobile-close { width: 42px; height: 42px; border: 0; background: #f4f4f4; color: #1d1d1d; font-size: 34px; line-height: 1; cursor: pointer; }
+.mobile-search { position: relative; margin: 12px 0 18px; }
+.mobile-search input { width: 100%; height: 46px; border: 0; background: #f6f6f6; border-radius: 0; padding: 0 50px 0 20px; color: var(--ink); font: inherit; font-weight: 800; outline: none; }
+.mobile-search input::placeholder { color: #7c898d; font-weight: 700; }
+.mobile-search svg { position: absolute; right: 17px; top: 50%; width: 21px; height: 21px; transform: translateY(-50%); color: #071f23; }
+.mobile-nav ul { list-style: none; padding: 0; margin: 0; }
+.mobile-nav > ul { display: grid; padding-top: 8px; }
+.mobile-nav > ul > li > a { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e8eeee; padding: 17px 0; color: var(--ink); font-size: 16px; font-weight: 950; text-transform: uppercase; letter-spacing: 0; }
+.mobile-nav .has-dropdown > a span { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 4px; background: #f4f4f4; color: var(--ink); font-size: 16px; }
+.mobile-nav .has-dropdown > ul { display: none; padding: 4px 0 14px 16px; border-bottom: 1px solid #e8eeee; }
+.mobile-nav .has-dropdown.open > ul { display: grid; }
+.mobile-nav .has-dropdown > ul a { display: block; padding: 9px 0; color: #637174; font-size: 14px; font-weight: 850; text-transform: none; }
+.mobile-nav li.is-hidden { display: none; }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 8px; padding: 0 24px; font-weight: 900; border: 1px solid transparent; transition: .2s ease; }
 .btn-primary { background: var(--red); color: #fff; }
 .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
@@ -1084,13 +1112,9 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 .float-instagram { background: linear-gradient(145deg, #d800ff, #8f19ff); }
 @media (max-width: 1100px) {
   .main-nav { display: none; }
-  .header-actions { min-width: auto; border-left: 0; padding-left: 0; }
+  .header-actions { min-width: auto; border-left: 0; padding-left: 0; margin-left: auto; }
   .menu-toggle { display: block; }
   .call-pill { display: none; }
-  .mobile-nav.open { display: block; }
-  .mobile-nav ul { padding: 14px 22px 24px; }
-  .mobile-nav a { display: block; padding: 11px 0; font-weight: 850; }
-  .mobile-nav .has-dropdown ul { display: grid; padding-left: 18px; color: var(--muted); }
   .hero-stats, .service-slider, .process-line { grid-template-columns: 1fr 1fr; }
   .footer-grid, .footer-contact { grid-template-columns: 1fr 1fr; }
   .district-grid { grid-template-columns: 1fr 1fr; }
@@ -1122,23 +1146,25 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 @media (max-width: 540px) {
   .container { width: calc(100% - 28px); max-width: 100%; }
   .site-header .container { width: calc(100% - 28px); }
-  .topbar { font-size: 12px; }
-  .topbar-inner { gap: 4px; padding: 8px 0; }
-  .nav-inner { gap: 14px; }
-  .brand-logo { width: 190px; }
-  .menu-toggle { width: 52px; height: 52px; padding: 14px; }
-  .hero { min-height: 720px; align-items: start; }
-  .hero-content { padding-top: 30px; max-width: 100%; }
+  .topbar { display: none; }
+  .nav-inner { min-height: 76px; gap: 14px; }
+  .brand-logo { width: 214px; }
+  .menu-toggle { width: 48px; height: 48px; padding: 11px; }
+  .menu-toggle span { height: 2px; margin: 6px 0; }
+  .mobile-nav { padding: 18px 34px 44px; }
+  .mobile-panel-logo img { width: 220px; }
+  .hero { min-height: 640px; align-items: start; }
+  .hero-content { padding-top: 28px; max-width: 100%; }
   .hero-label { font-size: 12px; padding: 6px 14px; }
-  .hero h1 { width: min(100%, 340px); max-width: 100%; font-size: 26px; line-height: 1.18; white-space: normal; overflow-wrap: anywhere; word-break: normal; }
-  .hero p { width: min(100%, 340px); max-width: 100%; font-size: 16px; line-height: 1.55; }
+  .hero h1 { width: min(100%, 350px); max-width: 100%; margin: 18px 0 10px; padding: 10px 12px; background: rgba(0,0,0,.62); font-size: 25px; line-height: 1.18; white-space: normal; overflow-wrap: anywhere; word-break: normal; }
+  .hero p { width: min(100%, 350px); max-width: 100%; margin: 0; padding: 12px; background: rgba(0,0,0,.56); font-size: 16px; line-height: 1.55; }
   .hero-actions { gap: 10px; margin-top: 24px; }
   .hero-actions .btn { min-height: 46px; padding: 0 18px; }
-  .hero-stats { width: min(100%, 340px); gap: 10px; margin-top: 28px; }
-  .hero-stats span { padding: 14px 16px; }
+  .hero-stats { display: none; }
   .section-head p { max-width: calc(100vw - 32px); }
   .section-head { max-width: calc(100vw - 32px); }
   .section-head h2, .split-copy h2, .quote-grid h2, .process-head h2, .page-hero h1 { font-size: 26px; line-height: 1.2; max-width: calc(100vw - 32px); white-space: normal; word-break: break-word; }
+  .section-head h2 { max-width: 330px; margin-left: auto; margin-right: auto; }
   .hero-stats, .process-line { grid-template-columns: 1fr; }
   .quote-form { padding: 28px; }
   .floating-actions { right: 12px; top: auto; bottom: 18px; transform: none; padding: 0; gap: 8px; border-radius: 0; background: transparent; box-shadow: none; }
@@ -1149,10 +1175,57 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 function js() {
   return `const menuToggle = document.querySelector(".menu-toggle");
 const mobileNav = document.querySelector(".mobile-nav");
+const mobileClose = document.querySelector(".mobile-close");
 if (menuToggle && mobileNav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = mobileNav.classList.toggle("open");
+  const mobileSearch = mobileNav.querySelector(".mobile-search input");
+  const resetMobileSearch = () => {
+    if (!mobileSearch) return;
+    mobileSearch.value = "";
+    mobileNav.querySelectorAll(".is-hidden").forEach((item) => item.classList.remove("is-hidden"));
+  };
+
+  const setMenuOpen = (isOpen) => {
+    mobileNav.classList.toggle("open", isOpen);
+    document.body.classList.toggle("menu-open", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+    if (!isOpen) resetMobileSearch();
+  };
+
+  menuToggle.addEventListener("click", () => setMenuOpen(!mobileNav.classList.contains("open")));
+  mobileClose?.addEventListener("click", () => setMenuOpen(false));
+
+  mobileNav.querySelectorAll(".has-dropdown > a").forEach((link) => {
+    link.setAttribute("aria-expanded", "false");
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const item = link.parentElement;
+      const isOpen = item.classList.toggle("open");
+      link.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+
+  mobileSearch?.addEventListener("input", () => {
+    const term = mobileSearch.value.trim().toLocaleLowerCase("tr-TR");
+    mobileNav.querySelectorAll(":scope > ul > li").forEach((item) => {
+      const text = item.textContent.toLocaleLowerCase("tr-TR");
+      const matches = !term || text.includes(term);
+      item.classList.toggle("is-hidden", !matches);
+      if (term && matches && item.classList.contains("has-dropdown")) {
+        item.classList.add("open");
+        item.children[0]?.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  mobileNav.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    if (link && !link.parentElement.classList.contains("has-dropdown")) {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
   });
 }
 
