@@ -823,6 +823,9 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'AW-18292997846');
+    gtag('config', 'AW-18292997846/WMi5CNX8nckcENb945JE', {
+      'phone_conversion_number': '+90 533 781 38 04'
+    });
   </script>
   <script type="application/ld+json">${JSON.stringify(allSchema.length === 1 ? allSchema[0] : { "@context": "https://schema.org", "@graph": allSchema })}</script>
 </head>
