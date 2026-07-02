@@ -817,6 +817,13 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
   <link rel="preload" as="image" href="${heroImageFallback}">
   <link rel="preload" as="style" href="${cssAssetPath}">
   <link rel="stylesheet" href="${cssAssetPath}">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18292997846"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'AW-18292997846');
+  </script>
   <script type="application/ld+json">${JSON.stringify(allSchema.length === 1 ? allSchema[0] : { "@context": "https://schema.org", "@graph": allSchema })}</script>
 </head>
 <body class="${bodyClass}">
