@@ -13,10 +13,10 @@ const instagramUrl = "https://www.instagram.com/hanedangroup2/";
 const googleSearchUrl = "https://www.google.com/search?q=kayserihanedannakliyat";
 const googleMapsUrl = "https://maps.app.goo.gl/2327bkojxRDpjAnv5";
 const address = "Gülük, Haseki Cd. No 7B, 38050 Melikgazi/Kayseri";
-const heroImage = "/assets/images/hero-slide-1.png";
-const truckImage = "/assets/images/hanedan-arac.jpeg";
-const buildingImage = "/assets/images/hanedan-arac-bina.jpeg";
-const secondTruckImage = "/assets/images/hero-slide-4.jpeg";
+const heroImage = "/assets/images/hero-slide-1.webp";
+const truckImage = "/assets/images/hanedan-arac.webp";
+const buildingImage = "/assets/images/hanedan-arac-bina.webp";
+const secondTruckImage = "/assets/images/hero-slide-4.webp";
 const heroSlides = [
   {
     image: heroImage,
@@ -311,7 +311,7 @@ function icon(name) {
 
 function logoMarkup() {
   return `<a class="brand" href="/" aria-label="${brand} anasayfa">
-    <img class="brand-logo" src="/assets/images/logo-navbar.png" alt="${brand}" width="1514" height="350">
+    <img class="brand-logo" src="/assets/images/logo-navbar.webp" alt="${brand}" width="1514" height="350">
   </a>`;
 }
 
@@ -332,7 +332,7 @@ function baseSchema() {
     "name": brand,
     "url": siteUrl,
     "image": `${siteUrl}${heroImage}`,
-    "logo": `${siteUrl}/assets/images/logo.png`,
+    "logo": `${siteUrl}/assets/images/logo.webp`,
     "telephone": [primaryPhone, secondaryPhone],
     "priceRange": "Teklif ile",
     "address": {
@@ -430,7 +430,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
       </div>
       <nav class="mobile-nav" id="mobileNav" aria-label="Mobil menü">
         <div class="mobile-panel-head">
-          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa"><img src="/assets/images/logo.png" alt="${brand}" width="1110" height="312"></a>
+          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa"><img src="/assets/images/logo.webp" alt="${brand}" width="1110" height="312"></a>
           <button class="mobile-close" type="button" aria-label="Menüyü kapat">×</button>
         </div>
         <div class="mobile-search" role="search">
@@ -913,12 +913,44 @@ function corporatePage(slug, title, body) {
   });
 }
 
+function titleFromFileName(fileName) {
+  return fileName
+    .replace(/\.webp$/i, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function importedGalleryImages() {
+  const manifestPath = path.join(root, "assets", "images", "imported-images.json");
+  if (!fs.existsSync(manifestPath)) return [];
+
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    const files = Array.isArray(manifest.files) ? manifest.files : [];
+    const hidden = new Set([
+      "favicon.webp",
+      "logo.webp",
+      "logo-navbar.webp",
+      "hero-slide-1.webp",
+      "hero-slide-4.webp",
+      "hanedan-arac.webp",
+      "hanedan-arac-bina.webp"
+    ]);
+    return files
+      .filter((fileName) => fileName.endsWith(".webp") && !hidden.has(fileName))
+      .map((fileName) => [`/assets/images/${fileName}`, `${brand} ${titleFromFileName(fileName)} görseli`]);
+  } catch {
+    return [];
+  }
+}
+
 function galleryPage() {
   const imageCards = [
     [heroImage, "Hanedan Nakliyat ana görseli"],
     [truckImage, "Hanedan Nakliyat araç görseli"],
     [buildingImage, "Kayseri Hanedan Nakliyat bina önü araç görseli"],
-    [secondTruckImage, "Kayseri Hanedan Nakliyat ikinci araç görseli"]
+    [secondTruckImage, "Kayseri Hanedan Nakliyat ikinci araç görseli"],
+    ...importedGalleryImages()
   ].map(([src, alt], index) => `<a href="${src}" class="gallery-item${index === 1 ? " tall" : ""}"><img src="${src}" alt="${alt}"></a>`).join("");
   const videoCards = galleryVideos.map((src, index) => `<div class="video-card"><video src="${src}" controls controlsList="nofullscreen nodownload" muted playsinline preload="metadata"></video><h2>Hanedan Nakliyat Video ${index + 1}</h2><p>Taşıma sürecinden araç ve ekip görüntüleri.</p></div>`).join("");
   const content = `
@@ -1041,7 +1073,7 @@ function blogPostPage(post) {
       "name": brand,
       "logo": {
         "@type": "ImageObject",
-        "url": `${siteUrl}/assets/images/logo.png`
+        "url": `${siteUrl}/assets/images/logo.webp`
       }
     },
     "image": `${siteUrl}${heroImage}`
