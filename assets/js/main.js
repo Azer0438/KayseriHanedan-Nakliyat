@@ -104,3 +104,14 @@ document.querySelectorAll(".quote-form").forEach((form) => {
     window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\n"));
   });
 });
+
+// Gallery Tabs
+document.querySelectorAll(".gallery-tab-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const tab = btn.getAttribute("data-tab");
+    document.querySelectorAll(".gallery-tab-btn").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".gallery-tab-pane").forEach((pane) => pane.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(tab + "-tab")?.classList.add("active");
+  });
+});
