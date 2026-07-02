@@ -8,6 +8,7 @@
     "puppeteer": "^25.3.0"
   },
   "devDependencies": {
+    "esbuild": "^0.28.1",
     "sharp": "^0.35.3"
   }
 }

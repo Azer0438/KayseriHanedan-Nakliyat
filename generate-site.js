@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { transformSync } = require("esbuild");
 
 const root = __dirname;
 const siteUrl = "https://kayserihanedannakliyat.com.tr";
@@ -13,18 +14,30 @@ const instagramUrl = "https://www.instagram.com/hanedangroup2/";
 const googleSearchUrl = "https://www.google.com/search?q=kayserihanedannakliyat";
 const googleMapsUrl = "https://maps.app.goo.gl/2327bkojxRDpjAnv5";
 const address = "Gülük, Haseki Cd. No 7B, 38050 Melikgazi/Kayseri";
+const cssAssetPath = "/assets/css/styles.min.css";
+const jsAssetPath = "/assets/js/main.min.js";
 const heroImage = "/assets/images/hero-slide-1.webp";
 const truckImage = "/assets/images/hanedan-arac.webp";
 const buildingImage = "/assets/images/hanedan-arac-bina.webp";
 const secondTruckImage = "/assets/images/hero-slide-4.webp";
+const heroImageFallback = "/assets/images/hero-slide-1-fallback.jpg";
+const truckImageFallback = "/assets/images/hanedan-arac-fallback.jpg";
+const buildingImageFallback = "/assets/images/hanedan-arac-bina-fallback.jpg";
+const secondTruckImageFallback = "/assets/images/hero-slide-4-fallback.jpg";
+const logoImage = "/assets/images/logo.webp";
+const logoImageFallback = "/assets/images/logo-fallback.png";
+const logoNavbarImage = "/assets/images/logo-navbar.webp";
+const logoNavbarImageFallback = "/assets/images/logo-navbar-fallback.png";
 const heroSlides = [
   {
     image: heroImage,
+    fallback: heroImageFallback,
     alt: "Hanedan Nakliyat ev ve ofis taşıma ana görseli",
     bare: true
   },
   {
     image: truckImage,
+    fallback: truckImageFallback,
     alt: "Kayseri Hanedan Nakliyat taşıma aracı",
     label: "Kayseri Hanedan Nakliyat",
     title: "Kayseri'de Eşyalarınızı Güvenle, Planlı ve Özenli Taşıyoruz",
@@ -33,6 +46,7 @@ const heroSlides = [
   },
   {
     image: buildingImage,
+    fallback: buildingImageFallback,
     alt: "Kayseri'de asansörlü ve planlı taşıma hizmeti",
     label: "Asansörlü Nakliyat",
     title: "Yüksek Katlarda Hızlı ve Kontrollü Taşıma",
@@ -41,6 +55,7 @@ const heroSlides = [
   },
   {
     image: secondTruckImage,
+    fallback: secondTruckImageFallback,
     alt: "Kayseri Hanedan Nakliyat ikinci araç görseli",
     label: "Kayseri Geneli Nakliyat",
     title: "Şehir İçi ve Şehirler Arasında Yanınızdayız",
@@ -286,6 +301,33 @@ function absolute(url) {
   return `${siteUrl}${url === "/" ? "/" : url.replace(/index\.html$/, "")}`;
 }
 
+function picture(webpSrc, fallbackSrc, alt, attrs = "") {
+  const fallback = fallbackSrc || webpSrc;
+  return `<picture><source srcset="${webpSrc}" type="image/webp"><img src="${fallback}" alt="${alt}"${attrs}></picture>`;
+}
+
+function siteSearchSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": brand,
+    "url": siteUrl,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": `${siteUrl}/blog/?q={search_term_string}`,
+      "query-input": "required name=search_term_string"
+    }
+  };
+}
+
+function minifyCss(source) {
+  return transformSync(source, { loader: "css", minify: true }).code;
+}
+
+function minifyJs(source) {
+  return transformSync(source, { loader: "js", minify: true, target: "es2019" }).code;
+}
+
 function icon(name) {
   const icons = {
     home: '<path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-9.5Z"/><path d="M9 21v-6h6v6"/>',
@@ -311,7 +353,7 @@ function icon(name) {
 
 function logoMarkup() {
   return `<a class="brand" href="/" aria-label="${brand} anasayfa">
-    <img class="brand-logo" src="/assets/images/logo-navbar.webp" alt="${brand}" width="1514" height="350">
+    ${picture(logoNavbarImage, logoNavbarImageFallback, brand, ' class="brand-logo" width="1514" height="350"')}
   </a>`;
 }
 
@@ -332,7 +374,7 @@ function baseSchema() {
     "name": brand,
     "url": siteUrl,
     "image": `${siteUrl}${heroImage}`,
-    "logo": `${siteUrl}/assets/images/logo.webp`,
+    "logo": `${siteUrl}${logoImage}`,
     "telephone": [primaryPhone, secondaryPhone],
     "priceRange": "Teklif ile",
     "address": {
@@ -366,7 +408,7 @@ function faqSchema(faqs) {
 
 function pageLayout({ title, description, url, keywords, bodyClass = "", content, schema = [], canonical }) {
   const cleanUrl = canonical || absolute(url);
-  const allSchema = [baseSchema(), ...schema.filter(Boolean)];
+  const allSchema = [baseSchema(), siteSearchSchema(), ...schema.filter(Boolean)];
   return `<!doctype html>
 <html lang="tr">
 <head>
@@ -397,9 +439,10 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preload" as="image" href="${heroImage}">
-  <link rel="preload" as="style" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="preload" as="image" href="${heroImage}" type="image/webp">
+  <link rel="preload" as="image" href="${heroImageFallback}">
+  <link rel="preload" as="style" href="${cssAssetPath}">
+  <link rel="stylesheet" href="${cssAssetPath}">
   <script type="application/ld+json">${JSON.stringify(allSchema.length === 1 ? allSchema[0] : { "@context": "https://schema.org", "@graph": allSchema })}</script>
 </head>
 <body class="${bodyClass}">
@@ -430,7 +473,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
       </div>
       <nav class="mobile-nav" id="mobileNav" aria-label="Mobil menü">
         <div class="mobile-panel-head">
-          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa"><img src="/assets/images/logo.webp" alt="${brand}" width="1110" height="312"></a>
+          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa">${picture(logoImage, logoImageFallback, brand, ' width="1110" height="312"')}</a>
           <button class="mobile-close" type="button" aria-label="Menüyü kapat">×</button>
         </div>
         <div class="mobile-search" role="search">
@@ -450,7 +493,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
     <a class="float-call" href="tel:${primaryTel}" aria-label="Telefon">${icon("phoneBooth")}</a>
     <a class="float-instagram" href="${instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram">${icon("instagram")}</a>
   </div>
-  <script src="/assets/js/main.js"></script>
+  <script src="${jsAssetPath}"></script>
 </body>
 </html>`;
 }
@@ -563,7 +606,7 @@ function homePage() {
   const heroDisplaySlides = heroSlides.filter((slide) => !slide.bare);
   const heroSlidesMarkup = heroDisplaySlides.map((slide, index) => `
     <article class="hero-slide${index === 0 ? " is-active" : ""}" aria-hidden="${index === 0 ? "false" : "true"}">
-      <img class="hero-bg" src="${slide.image}" alt="${slide.alt}"${index === 0 ? " fetchpriority=\"high\"" : ""}>
+      ${picture(slide.image, slide.fallback, slide.alt, ` class="hero-bg"${index === 0 ? " fetchpriority=\"high\"" : ""}`)}
       <div class="container hero-split">
         <div class="hero-content">
         <span class="hero-label">${slide.label}</span>
@@ -594,7 +637,7 @@ function homePage() {
   <section class="section about-split">
     <div class="container split-grid">
       <div class="image-stack">
-        <img src="${buildingImage}" alt="Kayseri Hanedan Nakliyat bina önü taşıma aracı">
+        ${picture(buildingImage, buildingImageFallback, "Kayseri Hanedan Nakliyat bina önü taşıma aracı")}
         <div class="experience-badge"><strong>HANEDAN</strong><span>Ev Ofis Taşıma</span></div>
       </div>
       <div class="split-copy">
@@ -616,7 +659,7 @@ function homePage() {
   </section>
 
   <section class="why-band">
-    <div class="why-bg"><img src="${buildingImage}" alt="Kayseri Hanedan Nakliyat şehir içi taşıma aracı"></div>
+    <div class="why-bg">${picture(buildingImage, buildingImageFallback, "Kayseri Hanedan Nakliyat şehir içi taşıma aracı")}</div>
     <div class="container why-content">
       <div class="why-tabs">
         <span>Uzman Kadro</span>
@@ -682,9 +725,9 @@ function homePage() {
         </div>
       </div>
       <div class="process-line">
-        <article><span>1</span><img src="${truckImage}" alt="Keşif ve planlama için Hanedan Nakliyat aracı"><h3>Keşif ve Planlama</h3><p>Eşya miktarı, bina yapısı, kat bilgisi ve mesafe analiz edilir.</p></article>
-        <article><span>2</span><img src="${buildingImage}" alt="Profesyonel taşıma ve araç yerleşim süreci"><h3>Profesyonel Taşıma</h3><p>Eşyalar türüne uygun paketlenir, araç içi yerleşim kontrollü yapılır.</p></article>
-        <article><span>3</span><img src="${truckImage}" alt="Güvenli teslimat için nakliye aracı"><h3>Güvenli Teslimat</h3><p>Eşyalar yeni adresinize teslim edilir, montaj ve yerleşim desteği sağlanır.</p></article>
+        <article><span>1</span>${picture(truckImage, truckImageFallback, "Keşif ve planlama için Hanedan Nakliyat aracı")}<h3>Keşif ve Planlama</h3><p>Eşya miktarı, bina yapısı, kat bilgisi ve mesafe analiz edilir.</p></article>
+        <article><span>2</span>${picture(buildingImage, buildingImageFallback, "Profesyonel taşıma ve araç yerleşim süreci")}<h3>Profesyonel Taşıma</h3><p>Eşyalar türüne uygun paketlenir, araç içi yerleşim kontrollü yapılır.</p></article>
+        <article><span>3</span>${picture(truckImage, truckImageFallback, "Güvenli teslimat için nakliye aracı")}<h3>Güvenli Teslimat</h3><p>Eşyalar yeni adresinize teslim edilir, montaj ve yerleşim desteği sağlanır.</p></article>
       </div>
     </div>
   </section>
@@ -791,7 +834,7 @@ function servicePage(service) {
         </ol>
       </article>
       <aside class="detail-aside">
-        <img src="${buildingImage}" alt="${service.title} için Kayseri Hanedan Nakliyat aracı">
+        ${picture(buildingImage, buildingImageFallback, `${service.title} için Kayseri Hanedan Nakliyat aracı`)}
         <div class="aside-card">
           <h2>Hızlı Teklif</h2>
           <p>${service.shortTitle} için adres ve kat bilgilerinizi paylaşın, size uygun planlamayı yapalım.</p>
@@ -869,7 +912,7 @@ function districtPage([slug, title, note]) {
         <div class="mini-service-list">${services.slice(0, 6).map((service) => `<a href="/hizmetler/${service.slug}/">${service.shortTitle}</a>`).join("")}</div>
       </article>
       <aside class="detail-aside">
-        <img src="${buildingImage}" alt="${title} evden eve nakliyat için Hanedan Nakliyat aracı">
+        ${picture(buildingImage, buildingImageFallback, `${title} evden eve nakliyat için Hanedan Nakliyat aracı`)}
         <div class="aside-card">
           <h2>${title} için Hızlı Teklif</h2>
           <p>Taşıma adresinizi, kat bilgisini ve tarih tercihinizi paylaşın.</p>
@@ -944,6 +987,14 @@ function importedGalleryImages() {
   }
 }
 
+function fallbackForWebp(src) {
+  if (src === heroImage) return heroImageFallback;
+  if (src === truckImage) return truckImageFallback;
+  if (src === buildingImage) return buildingImageFallback;
+  if (src === secondTruckImage) return secondTruckImageFallback;
+  return src;
+}
+
 function galleryPage() {
   const imageCards = [
     [heroImage, "Hanedan Nakliyat ana görseli"],
@@ -951,7 +1002,7 @@ function galleryPage() {
     [buildingImage, "Kayseri Hanedan Nakliyat bina önü araç görseli"],
     [secondTruckImage, "Kayseri Hanedan Nakliyat ikinci araç görseli"],
     ...importedGalleryImages()
-  ].map(([src, alt], index) => `<a href="${src}" class="gallery-item${index === 1 ? " tall" : ""}"><img src="${src}" alt="${alt}"></a>`).join("");
+  ].map(([src, alt], index) => `<a href="${src}" class="gallery-item${index === 1 ? " tall" : ""}">${picture(src, fallbackForWebp(src), alt)}</a>`).join("");
   const videoCards = galleryVideos.map((src, index) => `<div class="video-card"><video src="${src}" controls controlsList="nofullscreen nodownload" muted playsinline preload="metadata"></video><h2>Hanedan Nakliyat Video ${index + 1}</h2><p>Taşıma sürecinden araç ve ekip görüntüleri.</p></div>`).join("");
   const content = `
   <section class="page-hero compact-hero">
@@ -1073,7 +1124,7 @@ function blogPostPage(post) {
       "name": brand,
       "logo": {
         "@type": "ImageObject",
-        "url": `${siteUrl}/assets/images/logo.webp`
+        "url": `${siteUrl}${logoImage}`
       }
     },
     "image": `${siteUrl}${heroImage}`
@@ -1608,8 +1659,13 @@ function addPage(url, html) {
   pages.push(url);
 }
 
-write("assets/css/styles.css", css());
-write("assets/js/main.js", js());
+const cssSource = css();
+const jsSource = js();
+
+write("assets/css/styles.css", cssSource);
+write("assets/css/styles.min.css", minifyCss(cssSource));
+write("assets/js/main.js", jsSource);
+write("assets/js/main.min.js", minifyJs(jsSource));
 write("assets/images/logo-hanedan.svg", logoSvg());
 
 addPage("/", homePage());
