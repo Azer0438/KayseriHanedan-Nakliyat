@@ -8,3 +8,6 @@ Thumbs.db
 nav-preview.png
 nav-mobile-preview.png
 Görseller/
+
+.vercel
+.env*
