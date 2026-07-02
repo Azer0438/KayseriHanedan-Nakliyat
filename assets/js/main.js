@@ -1,3 +1,12 @@
+function trackEvent(name, params = {}) {
+  if (typeof window.gtag === "function") {
+    window.gtag("event", name, params);
+    return;
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: name, ...params });
+}
+
 const menuToggle = document.querySelector(".menu-toggle");
 const mobileNav = document.querySelector(".mobile-nav");
 const mobileClose = document.querySelector(".mobile-close");
@@ -102,8 +111,32 @@ document.querySelectorAll(".quote-form").forEach((form) => {
       "Asansor Durumu: " + (data.get("elevator") || ""),
       "Mesaj: " + (data.get("message") || "")
     ];
+
+    trackEvent("generate_lead", {
+      method: "whatsapp_form",
+      service: String(data.get("service") || "")
+    });
+
     const phone = form.dataset.whatsapp || "905337813804";
     window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\n"));
+  });
+});
+
+document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    trackEvent("contact_click", {
+      contact_type: "phone",
+      phone_number: (link.getAttribute("href") || "").replace("tel:", "")
+    });
+  });
+});
+
+document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    trackEvent("contact_click", {
+      contact_type: "whatsapp",
+      destination: link.getAttribute("href") || ""
+    });
   });
 });
 

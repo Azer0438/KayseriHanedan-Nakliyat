@@ -32,6 +32,20 @@ function titleText(html) {
 	return match ? match[1].trim() : "";
 }
 
+function ogUrl(html) {
+	const match = html.match(/<meta\s+property="og:url"\s+content="([^"]+)"\s*>/i);
+	return match ? match[1] : "";
+}
+
+function twitterTitle(html) {
+	const match = html.match(/<meta\s+name="twitter:title"\s+content="([^"]+)"\s*>/i);
+	return match ? match[1].trim() : "";
+}
+
+function extractJsonLdScripts(html) {
+	return [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)].map((match) => match[1].trim());
+}
+
 function run() {
 	const errors = [];
 	const sitemapXml = read("sitemap.xml");
@@ -57,6 +71,9 @@ function run() {
 		const html = fs.readFileSync(absolutePath, "utf8");
 		const canonical = canonicalHref(html);
 		const title = titleText(html);
+		const og = ogUrl(html);
+		const twitter = twitterTitle(html);
+		const jsonLdScripts = extractJsonLdScripts(html);
 
 		if (!canonical) {
 			errors.push(`Canonical tag missing in ${relativePath}`);
@@ -70,6 +87,28 @@ function run() {
 
 		if (!hasMetaDescription(html)) {
 			errors.push(`Meta description missing/empty in ${relativePath}`);
+		}
+
+		if (!og) {
+			errors.push(`og:url missing in ${relativePath}`);
+		} else if (og !== url) {
+			errors.push(`og:url mismatch in ${relativePath}: expected ${url}, found ${og}`);
+		}
+
+		if (!twitter) {
+			errors.push(`twitter:title missing/empty in ${relativePath}`);
+		}
+
+		if (!jsonLdScripts.length) {
+			errors.push(`JSON-LD script missing in ${relativePath}`);
+		} else {
+			jsonLdScripts.forEach((scriptContent, index) => {
+				try {
+					JSON.parse(scriptContent);
+				} catch {
+					errors.push(`Invalid JSON-LD in ${relativePath} (script #${index + 1})`);
+				}
+			});
 		}
 	}
 
