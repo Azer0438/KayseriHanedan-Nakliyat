@@ -94,6 +94,146 @@ const blogPosts = [
       "Asansör kararı, sadece kat sayısına göre değil eşya tipi, bina mimarisi ve mahalle erişimine göre verilmelidir.",
       "Profesyonel ekip tarafından yapılan ön keşif, taşıma günü sürprizlerini azaltır ve süreyi kısaltır."
     ]
+  },
+  {
+    slug: "kayseri-istanbul-nakliyat-planlama-rehberi",
+    routeSlug: "kayseri-istanbul-evden-eve-nakliyat",
+    title: "Kayseri İstanbul Nakliyat Planlama Rehberi",
+    description: "Kayseri-İstanbul evden eve nakliyat sürecinde rota, paketleme ve teslimat planı.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri istanbul evden eve nakliyat, kayseri istanbul nakliyat planlama",
+    content: [
+      "Kayseri-İstanbul hattı uzun mesafeli olduğu için taşıma tarihinin en az 5-7 gün önceden netleştirilmesi operasyon kalitesini artırır.",
+      "Yükleme sırası ve araç içi sabitleme, uzun yol kaynaklı hasar riskini azaltır. Kırılabilir ürünler için çift katman koruma tercih edilmelidir.",
+      "Rota detaylarını ve teklif adımlarını <a href=\"/sehirler-arasi/kayseri-istanbul-evden-eve-nakliyat/\">Kayseri İstanbul evden eve nakliyat sayfamızda</a> inceleyebilirsiniz."
+    ]
+  },
+  {
+    slug: "kayseri-ankara-tasinmada-ayni-gun-plan",
+    routeSlug: "kayseri-ankara-evden-eve-nakliyat",
+    title: "Kayseri Ankara Taşınmada Aynı Gün Plan Mümkün mü?",
+    description: "Kayseri-Ankara şehirler arası taşınmada aynı gün planlama için kritik adımlar.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri ankara nakliyat, aynı gün taşınma, kayseri ankara evden eve",
+    content: [
+      "Kayseri-Ankara hattında aynı gün teslim için erken saat yükleme, net adres bilgisi ve bina erişim uygunluğu büyük önem taşır.",
+      "Kat ve asansör bilgisi önceden paylaşılırsa ekip planlaması daha doğru yapılır ve bekleme süresi azalır.",
+      "Rota hizmet detayları için <a href=\"/sehirler-arasi/kayseri-ankara-evden-eve-nakliyat/\">Kayseri Ankara evden eve nakliyat</a> sayfasına göz atabilirsiniz."
+    ]
+  },
+  {
+    slug: "kayseri-izmir-uzun-yol-esya-koruma",
+    routeSlug: "kayseri-izmir-evden-eve-nakliyat",
+    title: "Kayseri İzmir Uzun Yol Taşımada Eşya Koruma",
+    description: "Kayseri-İzmir taşıma hattında paketleme ve araç içi sabitleme önerileri.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri izmir nakliyat, uzun yol eşya koruma, şehirler arası paketleme",
+    content: [
+      "Kayseri-İzmir gibi uzun rotalarda kolileme standardı, taşıma güvenliğinin en temel parçasıdır.",
+      "Beyaz eşya, cam ve elektronik ürünlerin araç içinde ayrı bloklar halinde sabitlenmesi gerekir.",
+      "Bu rota için planlanan süreçleri <a href=\"/sehirler-arasi/kayseri-izmir-evden-eve-nakliyat/\">Kayseri İzmir rota sayfasında</a> bulabilirsiniz."
+    ]
+  },
+  {
+    slug: "kayseri-antalya-tasinma-donemi-onerileri",
+    routeSlug: "kayseri-antalya-evden-eve-nakliyat",
+    title: "Kayseri Antalya Taşınma Dönemi İçin Pratik Öneriler",
+    description: "Kayseri-Antalya ev taşımasında sezon, saat ve teslimat planı nasıl yapılır?",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri antalya nakliyat, antalya taşınma planı, şehirler arası ev taşıma",
+    content: [
+      "Antalya hattında yaz dönemi yoğunluğu nedeniyle tarih esnekliği bırakmak operasyonu daha sağlıklı yönetmenizi sağlar.",
+      "Taşıma günü trafik ve bina yoğunluğunu azaltmak için sabah yükleme planı önerilir.",
+      "Detaylı rota bilgisi için <a href=\"/sehirler-arasi/kayseri-antalya-evden-eve-nakliyat/\">Kayseri Antalya evden eve nakliyat</a> sayfasını inceleyin."
+    ]
+  },
+  {
+    slug: "kayseri-bursa-evden-eve-teslimat-planlama",
+    routeSlug: "kayseri-bursa-evden-eve-nakliyat",
+    title: "Kayseri Bursa Evden Eve Teslimat Planlama",
+    description: "Kayseri-Bursa hattında teslim saatini etkileyen faktörler ve taşıma akışı.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri bursa nakliyat, bursa teslimat planı, kayseri bursa ev taşıma",
+    content: [
+      "Kayseri-Bursa taşımalarında teslim adresinin sokak ve park erişimi, teslimat hızını doğrudan etkiler.",
+      "Mobilya söküm-montaj gerektiren taşınmalarda ek süre planlaması yapılmalıdır.",
+      "Rota bazlı hizmet adımları için <a href=\"/sehirler-arasi/kayseri-bursa-evden-eve-nakliyat/\">Kayseri Bursa rota sayfasına</a> geçebilirsiniz."
+    ]
+  },
+  {
+    slug: "kayseri-kocaeli-sehirler-arasi-nakliyat-sureci",
+    routeSlug: "kayseri-kocaeli-evden-eve-nakliyat",
+    title: "Kayseri Kocaeli Şehirler Arası Nakliyat Süreci",
+    description: "Kayseri-Kocaeli hattında ev ve parça eşya taşımada süreç yönetimi.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri kocaeli nakliyat, kayseri kocaeli parça eşya taşıma",
+    content: [
+      "Kocaeli hattında organize sanayi bölgelerine yakın adreslerde saat planlaması kritik hale gelir.",
+      "Parça eşya taşımalarında ürün listesi ve ölçü bilgisi paylaşımı teklif doğruluğunu artırır.",
+      "Rota detaylarını <a href=\"/sehirler-arasi/kayseri-kocaeli-evden-eve-nakliyat/\">Kayseri Kocaeli evden eve nakliyat</a> sayfasında bulabilirsiniz."
+    ]
+  },
+  {
+    slug: "kayseri-konya-ev-tasima-oncesi-kontrol",
+    routeSlug: "kayseri-konya-evden-eve-nakliyat",
+    title: "Kayseri Konya Ev Taşıma Öncesi Kontrol Adımları",
+    description: "Kayseri-Konya taşınmasında hazırlık kontrol listesi ve planlama önerileri.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri konya nakliyat, kayseri konya ev taşıma",
+    content: [
+      "Konya hattında aynı gün veya ertesi gün teslim hedefi için eşya sınıflandırması önceden tamamlanmalıdır.",
+      "Asansör gereksinimi varsa bina uygunluğu mutlaka taşıma gününden önce kontrol edilmelidir.",
+      "Hizmet adımlarını <a href=\"/sehirler-arasi/kayseri-konya-evden-eve-nakliyat/\">Kayseri Konya rota sayfasından</a> inceleyebilirsiniz."
+    ]
+  },
+  {
+    slug: "kayseri-adana-nakliyatta-fiyat-ve-sure",
+    routeSlug: "kayseri-adana-evden-eve-nakliyat",
+    title: "Kayseri Adana Nakliyatta Fiyat ve Süreyi Etkileyen Unsurlar",
+    description: "Kayseri-Adana şehirler arası taşımada fiyat hesaplaması ve süre planı.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri adana nakliyat fiyatı, kayseri adana evden eve",
+    content: [
+      "Kayseri-Adana taşımalarında fiyat; eşya hacmi, kat bilgisi, asansör ihtiyacı ve teslim koşullarına göre değişir.",
+      "Net teklif için eşya fotoğrafları ve taşınma tarihi bilgisinin paylaşılması önerilir.",
+      "Rota özelinde detaylı bilgi için <a href=\"/sehirler-arasi/kayseri-adana-evden-eve-nakliyat/\">Kayseri Adana evden eve nakliyat</a> sayfasını ziyaret edin."
+    ]
+  },
+  {
+    slug: "kayseri-mersin-evden-eve-guvenli-yukleme",
+    routeSlug: "kayseri-mersin-evden-eve-nakliyat",
+    title: "Kayseri Mersin Evden Eve Taşımada Güvenli Yükleme",
+    description: "Kayseri-Mersin taşımalarında güvenli yükleme ve teslimat planı.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri mersin nakliyat, güvenli yükleme, şehirler arası taşıma",
+    content: [
+      "Mersin hattında taşıma güvenliği için yükleme sırasının eşya türüne göre düzenlenmesi gerekir.",
+      "Hassas ürünler için kenar-köşe koruma ve araç içi sabitleme standartları uygulanmalıdır.",
+      "Rota sürecine dair detaylar <a href=\"/sehirler-arasi/kayseri-mersin-evden-eve-nakliyat/\">Kayseri Mersin rota sayfasında</a> yer alıyor."
+    ]
+  },
+  {
+    slug: "kayseri-gaziantep-tasinma-gunu-rehberi",
+    routeSlug: "kayseri-gaziantep-evden-eve-nakliyat",
+    title: "Kayseri Gaziantep Taşınma Günü Rehberi",
+    description: "Kayseri-Gaziantep hattında taşınma gününde dikkat edilmesi gerekenler.",
+    date: "2026-07-02",
+    category: "Şehirler Arası Nakliyat",
+    keywords: "kayseri gaziantep nakliyat, taşınma günü rehberi, evden eve taşıma",
+    content: [
+      "Taşınma günü öncesi bina yönetimi bilgilendirmesi ve park planı yapılması operasyonu hızlandırır.",
+      "Gaziantep varışlı teslimatlarda oda bazlı etiketleme yeni adreste düzen kurmayı kolaylaştırır.",
+      "Rota ve teklif detaylarını <a href=\"/sehirler-arasi/kayseri-gaziantep-evden-eve-nakliyat/\">Kayseri Gaziantep evden eve nakliyat</a> sayfasından inceleyebilirsiniz."
+    ]
   }
 ];
 
@@ -1089,6 +1229,7 @@ function intercityRoutePage(route) {
     "url": absolute(url)
   };
   const related = intercityRoutes.filter((item) => item.slug !== route.slug).slice(0, 4);
+  const routeBlogs = blogPosts.filter((post) => post.routeSlug === route.slug).slice(0, 2);
   const content = `
   <section class="page-hero service-hero">
     <div class="container">
@@ -1129,6 +1270,12 @@ function intercityRoutePage(route) {
       <div class="district-grid">${related.map((item) => `<article class="district-card"><h2>${item.from} - ${item.to}</h2><p>${item.note}</p><a href="/sehirler-arasi/${item.slug}/">Rota detayını incele</a></article>`).join("")}</div>
     </div>
   </section>
+  ${routeBlogs.length ? `<section class="section">
+    <div class="container">
+      ${sectionIntro("Rota Rehberi", `${route.from} - ${route.to} İçin Özel Blog İçeriği`, "Bu rota için hazırladığımız rehber yazıyı okuyarak taşınma planınızı netleştirebilirsiniz.")}
+      <div class="district-grid">${routeBlogs.map((post) => `<article class="district-card"><h2>${post.title}</h2><p>${post.description}</p><a href="/blog/${post.slug}/">Yazıyı oku</a></article>`).join("")}</div>
+    </div>
+  </section>` : ""}
   <section class="section faq"><div class="container">${sectionIntro("SSS", `${route.from} - ${route.to} Nakliyat Soruları`, "Bu rota için en sık sorulan başlıklar.")}${faqMarkup(faqs)}</div></section>`;
 
   return pageLayout({
