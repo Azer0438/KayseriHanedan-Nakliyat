@@ -96,6 +96,8 @@ document.querySelectorAll(".quote-form").forEach((form) => {
       "Tasima Turu: " + (data.get("service") || ""),
       "Alinacak Adres / Ilce: " + (data.get("from") || ""),
       "Teslim Adresi / Ilce: " + (data.get("to") || ""),
+      "Tasinma Tarihi: " + (data.get("moveDate") || ""),
+      "Ev Tipi / Hacim: " + (data.get("volume") || ""),
       "Kat Bilgisi: " + (data.get("floor") || ""),
       "Asansor Durumu: " + (data.get("elevator") || ""),
       "Mesaj: " + (data.get("message") || "")

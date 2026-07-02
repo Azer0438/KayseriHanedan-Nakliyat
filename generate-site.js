@@ -263,6 +263,99 @@ const districts = [
   ["yahyali", "Yahyalı", "Yahyalı çıkışlı ve Yahyalı varışlı taşımalarda güvenli yükleme ve zamanında teslimat odağı."]
 ];
 
+const intercityRoutes = [
+  {
+    slug: "kayseri-istanbul-evden-eve-nakliyat",
+    title: "Kayseri İstanbul Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "İstanbul",
+    distance: "yaklaşık 770 km",
+    duration: "1-2 gün",
+    note: "Kayseri'den İstanbul'a düzenli şehirler arası taşıma planı, paketleme ve teslimat koordinasyonu."
+  },
+  {
+    slug: "kayseri-ankara-evden-eve-nakliyat",
+    title: "Kayseri Ankara Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Ankara",
+    distance: "yaklaşık 320 km",
+    duration: "aynı gün / ertesi gün",
+    note: "Kayseri-Ankara hattında ev, ofis ve parça eşya taşımalarında hızlı planlama."
+  },
+  {
+    slug: "kayseri-izmir-evden-eve-nakliyat",
+    title: "Kayseri İzmir Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "İzmir",
+    distance: "yaklaşık 890 km",
+    duration: "1-2 gün",
+    note: "Uzun mesafede eşya güvenliği için korumalı paketleme ve araç içi sabitleme uygulanır."
+  },
+  {
+    slug: "kayseri-antalya-evden-eve-nakliyat",
+    title: "Kayseri Antalya Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Antalya",
+    distance: "yaklaşık 610 km",
+    duration: "1 gün",
+    note: "Kayseri çıkışlı Antalya taşımalarında mevsimsel yoğunluğa göre rota ve saat planı yapılır."
+  },
+  {
+    slug: "kayseri-bursa-evden-eve-nakliyat",
+    title: "Kayseri Bursa Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Bursa",
+    distance: "yaklaşık 690 km",
+    duration: "1-2 gün",
+    note: "Bursa hattında teslimat saatini netleştiren planlı şehirler arası nakliyat desteği."
+  },
+  {
+    slug: "kayseri-kocaeli-evden-eve-nakliyat",
+    title: "Kayseri Kocaeli Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Kocaeli",
+    distance: "yaklaşık 700 km",
+    duration: "1-2 gün",
+    note: "Kayseri-Kocaeli güzergahında evden eve nakliyat ve parça eşya taşıma hizmeti."
+  },
+  {
+    slug: "kayseri-konya-evden-eve-nakliyat",
+    title: "Kayseri Konya Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Konya",
+    distance: "yaklaşık 310 km",
+    duration: "aynı gün / ertesi gün",
+    note: "Konya hattında hızlı yükleme, düzenli sevkiyat ve kontrollü teslimat odaklı operasyon."
+  },
+  {
+    slug: "kayseri-adana-evden-eve-nakliyat",
+    title: "Kayseri Adana Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Adana",
+    distance: "yaklaşık 335 km",
+    duration: "aynı gün / ertesi gün",
+    note: "Kayseri-Adana taşımalarında adres erişimi ve kat bilgisine göre ekip planı oluşturulur."
+  },
+  {
+    slug: "kayseri-mersin-evden-eve-nakliyat",
+    title: "Kayseri Mersin Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Mersin",
+    distance: "yaklaşık 330 km",
+    duration: "aynı gün / ertesi gün",
+    note: "Mersin varışlı taşımalarda eşyalarınız için korumalı yükleme ve net teslimat planı."
+  },
+  {
+    slug: "kayseri-gaziantep-evden-eve-nakliyat",
+    title: "Kayseri Gaziantep Evden Eve Nakliyat",
+    from: "Kayseri",
+    to: "Gaziantep",
+    distance: "yaklaşık 390 km",
+    duration: "aynı gün / ertesi gün",
+    note: "Kayseri çıkışlı Gaziantep hattında şehirler arası ev taşıma ve ofis taşıma desteği."
+  }
+];
+
 const nav = [
   ["Anasayfa", "/"],
   ["Kurumsal", "/kurumsal/hakkimizda/", [
@@ -273,6 +366,7 @@ const nav = [
     ["KVKK", "/kurumsal/kvkk/"]
   ]],
   ["Hizmetlerimiz", "/hizmetler/", services.map((service) => [service.shortTitle, `/hizmetler/${service.slug}/`])],
+  ["Rotalar", "/sehirler-arasi-nakliyat/", intercityRoutes.map((route) => [`${route.from} - ${route.to}`, `/sehirler-arasi/${route.slug}/`])],
   ["Bölgeler", "/bolgeler/", districts.map(([slug, title]) => [title, `/bolgeler/${slug}-evden-eve-nakliyat/`])],
   ["Blog", "/blog/"],
   ["Galeri", "/galeri/"],
@@ -385,7 +479,7 @@ function baseSchema() {
       "postalCode": "38050",
       "addressCountry": "TR"
     },
-    "areaServed": ["Kayseri", "Melikgazi", "Kocasinan", "Talas", "Hacılar", "İncesu", "Develi", "Bünyan", "Yeşilhisar", "Akkışla", "Felahiye", "Özvatan", "Pınarbaşı", "Sarıoğlan", "Sarız", "Tomarza", "Yahyalı"],
+    "areaServed": ["Türkiye", "Kayseri", "Melikgazi", "Kocasinan", "Talas", "Hacılar", "İncesu", "Develi", "Bünyan", "Yeşilhisar", "Akkışla", "Felahiye", "Özvatan", "Pınarbaşı", "Sarıoğlan", "Sarız", "Tomarza", "Yahyalı"],
     "sameAs": [instagramUrl]
   };
 }
@@ -569,6 +663,15 @@ function serviceCards(limit = services.length) {
   </article>`).join("");
 }
 
+function intercityRouteCards(limit = intercityRoutes.length) {
+  return intercityRoutes.slice(0, limit).map((route) => `<article class="district-card">
+    <h2>${route.from} - ${route.to} Nakliyat</h2>
+    <p>${route.note}</p>
+    <p><strong>Mesafe:</strong> ${route.distance}<br><strong>Planlama:</strong> ${route.duration}</p>
+    <a href="/sehirler-arasi/${route.slug}/">Rota detayını incele</a>
+  </article>`).join("");
+}
+
 function quickQuoteForm(compact = false) {
   return `<form class="quote-form ${compact ? "quote-form-compact" : ""}" data-whatsapp="${whatsapp}">
     <h2>Hızlı Teklif Alın</h2>
@@ -578,8 +681,12 @@ function quickQuoteForm(compact = false) {
       <label><span>Taşıma Türü</span><select name="service"><option>Evden Eve Nakliyat</option><option>Asansörlü Nakliyat</option><option>Şehir İçi Nakliyat</option><option>Şehirler Arası Nakliyat</option><option>Ofis ve İşyeri Taşıma</option><option>Eşya Depolama</option><option>Parça Eşya Taşıma</option></select></label>
     </div>
     <div class="form-row">
-      <label><span>Alınacak Adres / İlçe</span><input name="from" type="text" placeholder="Örn. Melikgazi"></label>
-      <label><span>Teslim Adresi / İlçe</span><input name="to" type="text" placeholder="Örn. Talas"></label>
+      <label><span>Nereden (İl / İlçe)</span><input name="from" type="text" required placeholder="Örn. Kayseri / Melikgazi"></label>
+      <label><span>Nereye (İl / İlçe)</span><input name="to" type="text" required placeholder="Örn. İstanbul / Kadıköy"></label>
+    </div>
+    <div class="form-row">
+      <label><span>Taşınma Tarihi</span><input name="moveDate" type="date" required></label>
+      <label><span>Ev Tipi / Hacim</span><select name="volume"><option>1+1</option><option>2+1</option><option>3+1</option><option>4+1 ve üzeri</option><option>Villa</option><option>Parça Eşya / Ofis</option></select></label>
     </div>
     <div class="form-row">
       <label><span>Kat Bilgisi</span><select name="floor"><option>Zemin Kat</option><option>1-3 Kat</option><option>4-7 Kat</option><option>8+ Kat</option></select></label>
@@ -628,9 +735,17 @@ function homePage() {
   </section>
   <section class="section services-showcase pattern-bg">
     <div class="container">
-      ${sectionIntro("Kayseri Evden Eve Nakliyat", "Tüm Taşıma İhtiyaçlarınız İçin Profesyonel Çözümler", "Evinizi, ofisinizi veya parça eşyanızı taşırken doğru planlama, uygun ekipman ve güvenilir ekip desteğiyle yanınızdayız.")}
+      ${sectionIntro("Kayseri Çıkışlı Türkiye Geneli Nakliyat", "Tüm Taşıma İhtiyaçlarınız İçin Profesyonel Çözümler", "Evinizi, ofisinizi veya parça eşyanızı taşırken doğru planlama, uygun ekipman ve güvenilir ekip desteğiyle yanınızdayız.")}
       <div class="service-slider">${serviceCards(4)}</div>
       <div class="center mt-40"><a class="btn btn-primary" href="/hizmetler/">Tüm Hizmetleri Gör</a></div>
+    </div>
+  </section>
+
+  <section class="section pattern-bg">
+    <div class="container">
+      ${sectionIntro("Popüler Şehirler Arası Rotalar", "Kayseri'den Türkiye Geneline Taşıma", "En çok talep alan şehirler arası hatlarda planlı araç, paketleme ve teslimat desteği sunuyoruz.")}
+      <div class="district-grid">${intercityRouteCards(6)}</div>
+      <div class="center mt-40"><a class="btn btn-primary" href="/sehirler-arasi-nakliyat/">Tüm Rotaları Gör</a></div>
     </div>
   </section>
 
@@ -740,7 +855,7 @@ function homePage() {
       </article>
       <article>
         <h2>Yeni Nesil Taşımacılık, Eski Dostluk</h2>
-        <p>Taşınma stresini azaltmak için iletişimi açık, fiyatlandırmayı net ve süreci planlı tutuyoruz. Teklif almak için bizi arayabilir veya WhatsApp hattımıza yazabilirsiniz.</p>
+        <p>Kayseri çıkışlı İstanbul, Ankara, İzmir, Antalya ve diğer illere şehirler arası taşımalarda iletişimi açık, fiyatlandırmayı net ve süreci planlı tutuyoruz. Teklif almak için bizi arayabilir veya WhatsApp hattımıza yazabilirsiniz.</p>
       </article>
     </div>
   </section>
@@ -773,7 +888,7 @@ function serviceIndexPage() {
       ${breadcrumb([["Hizmetlerimiz", "/hizmetler/"]])}
       <span class="kicker">Hanedan Nakliyat Hizmetleri</span>
       <h1>Kayseri Nakliyat Hizmetleri</h1>
-      <p>Evden eve nakliyat, asansörlü taşıma, şehir içi ve şehirler arası nakliyat, ofis taşıma, eşya depolama ve paketleme çözümleri.</p>
+      <p>Evden eve nakliyat, asansörlü taşıma, Kayseri içi ve Kayseri çıkışlı şehirler arası nakliyat, ofis taşıma, eşya depolama ve paketleme çözümleri.</p>
     </div>
   </section>
   <section class="section">
@@ -932,6 +1047,100 @@ function districtPage([slug, title, note]) {
   });
 }
 
+function intercityRoutesIndexPage() {
+  const content = `
+  <section class="page-hero compact-hero">
+    <div class="container">
+      ${breadcrumb([["Rotalar", "/sehirler-arasi-nakliyat/"]])}
+      <span class="kicker">Kayseri Çıkışlı Şehirler Arası Nakliyat</span>
+      <h1>Kayseri'den Türkiye Geneline Evden Eve Nakliyat Rotaları</h1>
+      <p>Kayseri çıkışlı ve Kayseri varışlı şehirler arası nakliyat hatlarımız için rota bazlı planlama detaylarını inceleyin.</p>
+    </div>
+  </section>
+  <section class="section pattern-bg">
+    <div class="container district-grid">
+      ${intercityRouteCards()}
+    </div>
+  </section>`;
+  return pageLayout({
+    title: "Kayseri Çıkışlı Şehirler Arası Nakliyat Rotaları | Kayseri Hanedan Nakliyat",
+    description: "Kayseri'den İstanbul, Ankara, İzmir, Antalya ve diğer illere şehirler arası evden eve nakliyat rotaları ve taşıma planı.",
+    url: "/sehirler-arasi-nakliyat/",
+    keywords: "kayseri şehirler arası nakliyat rotaları, kayseri çıkışlı evden eve nakliyat, kayseri türkiye geneli taşıma",
+    content
+  });
+}
+
+function intercityRoutePage(route) {
+  const url = `/sehirler-arasi/${route.slug}/`;
+  const faqs = [
+    [`${route.from} - ${route.to} nakliyatta fiyat nasıl belirlenir?`, "Mesafe, eşya hacmi, kat bilgisi, paketleme kapsamı ve teslim tarih aralığı birlikte değerlendirilir."],
+    ["Şehirler arası taşımada teslimat süresi neye göre değişir?", "Hava ve yol koşulları, yükleme saati, rota yoğunluğu ve adres erişimi teslimat planını etkileyebilir."],
+    ["Eşyalar uzun yolda nasıl korunur?", "Eşyalar türüne uygun paketlenir, araç içinde sabitlenir ve yükleme sırası kontrollü şekilde planlanır."]
+  ];
+  const routeSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": route.title,
+    "provider": { "@id": `${siteUrl}/#localbusiness` },
+    "areaServed": [route.from, route.to],
+    "serviceType": "Şehirler Arası Evden Eve Nakliyat",
+    "description": route.note,
+    "url": absolute(url)
+  };
+  const related = intercityRoutes.filter((item) => item.slug !== route.slug).slice(0, 4);
+  const content = `
+  <section class="page-hero service-hero">
+    <div class="container">
+      ${breadcrumb([["Rotalar", "/sehirler-arasi-nakliyat/"], [route.title, url]])}
+      <span class="kicker">${brand}</span>
+      <h1>${route.title}</h1>
+      <p>${route.note}</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="/teklif-al/">Teklif Al</a><a class="btn btn-outline" href="tel:${primaryTel}">${primaryPhone}</a></div>
+    </div>
+  </section>
+  <section class="section service-detail">
+    <div class="container detail-grid">
+      <article class="detail-copy">
+        <p>${route.from} - ${route.to} hattında taşıma planında ilk adım eşya hacmi ve adres erişimini netleştirmektir. Böylece doğru araç ve ekip seçimi yapılır.</p>
+        <p><strong>Mesafe:</strong> ${route.distance}<br><strong>Planlanan teslim:</strong> ${route.duration}</p>
+        <p>Uzun mesafede hasar riskini azaltmak için paketleme, yükleme sırası ve araç içi sabitleme standartlarına göre ilerlenir. Taşıma günü öncesinde saat planı netleştirilir.</p>
+        <h2>${route.title} İçin Süreç</h2>
+        <ol class="number-list">
+          <li>Nereden-nereye taşınacağı, kat ve asansör bilgisi alınır.</li>
+          <li>Eşya hacmine göre araç ve ekip planı yapılır.</li>
+          <li>Paketleme ve yükleme sonrası rota takvimi paylaşılır.</li>
+          <li>Yeni adreste teslimat, montaj ve yerleşim desteği tamamlanır.</li>
+        </ol>
+      </article>
+      <aside class="detail-aside">
+        ${picture(truckImage, truckImageFallback, `${route.title} için şehirler arası nakliyat aracı`)}
+        <div class="aside-card">
+          <h2>Bu Rota İçin Hızlı Teklif</h2>
+          <p>Nereden-nereye taşıma yapılacağını ve tarih bilginizi paylaşın.</p>
+          <a class="btn btn-primary" href="${waLink(`Merhaba, ${route.title} için teklif almak istiyorum.`)}" target="_blank" rel="noopener">WhatsApp'tan Yaz</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <section class="section pattern-bg">
+    <div class="container">
+      ${sectionIntro("Diğer Rotalar", "Benzer Şehirler Arası Nakliyat Hatları", "Kayseri çıkışlı diğer şehirler arası rotalarımıza da göz atabilirsiniz.")}
+      <div class="district-grid">${related.map((item) => `<article class="district-card"><h2>${item.from} - ${item.to}</h2><p>${item.note}</p><a href="/sehirler-arasi/${item.slug}/">Rota detayını incele</a></article>`).join("")}</div>
+    </div>
+  </section>
+  <section class="section faq"><div class="container">${sectionIntro("SSS", `${route.from} - ${route.to} Nakliyat Soruları`, "Bu rota için en sık sorulan başlıklar.")}${faqMarkup(faqs)}</div></section>`;
+
+  return pageLayout({
+    title: `${route.title} | ${brand}`,
+    description: `${route.from} - ${route.to} şehirler arası evden eve nakliyat için Kayseri Hanedan Nakliyat'tan planlı taşıma ve hızlı teklif alın.`,
+    url,
+    keywords: `${route.from.toLowerCase()} ${route.to.toLowerCase()} evden eve nakliyat, ${route.from.toLowerCase()} çıkışlı şehirler arası taşıma, ${route.to.toLowerCase()} nakliyat`,
+    content,
+    schema: [routeSchema, faqSchema(faqs)]
+  });
+}
+
 function corporatePage(slug, title, body) {
   const content = `
   <section class="page-hero compact-hero">
@@ -1072,7 +1281,7 @@ function quotePage() {
         <div class="check-grid single">
           <span>${icon("check")} WhatsApp üzerinden hızlı dönüş</span>
           <span>${icon("check")} Eşya fotoğrafı ile pratik keşif</span>
-          <span>${icon("check")} Kayseri geneli taşıma planı</span>
+          <span>${icon("check")} Kayseri çıkışlı Türkiye geneli taşıma planı</span>
         </div>
       </div>
       ${quickQuoteForm()}
@@ -1594,6 +1803,8 @@ document.querySelectorAll(".quote-form").forEach((form) => {
       "Tasima Turu: " + (data.get("service") || ""),
       "Alinacak Adres / Ilce: " + (data.get("from") || ""),
       "Teslim Adresi / Ilce: " + (data.get("to") || ""),
+      "Tasinma Tarihi: " + (data.get("moveDate") || ""),
+      "Ev Tipi / Hacim: " + (data.get("volume") || ""),
       "Kat Bilgisi: " + (data.get("floor") || ""),
       "Asansor Durumu: " + (data.get("elevator") || ""),
       "Mesaj: " + (data.get("message") || "")
@@ -1671,6 +1882,8 @@ write("assets/images/logo-hanedan.svg", logoSvg());
 addPage("/", homePage());
 addPage("/hizmetler/", serviceIndexPage());
 services.forEach((service) => addPage(`/hizmetler/${service.slug}/`, servicePage(service)));
+addPage("/sehirler-arasi-nakliyat/", intercityRoutesIndexPage());
+intercityRoutes.forEach((route) => addPage(`/sehirler-arasi/${route.slug}/`, intercityRoutePage(route)));
 addPage("/bolgeler/", districtsIndexPage());
 districts.forEach((district) => addPage(`/bolgeler/${district[0]}-evden-eve-nakliyat/`, districtPage(district)));
 
