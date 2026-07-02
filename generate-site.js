@@ -3,7 +3,7 @@ const path = require("path");
 const { transformSync } = require("esbuild");
 
 const root = __dirname;
-const siteUrl = "https://kayserihanedannakliyat.com.tr";
+const siteUrl = "https://www.kayserihanedannakliyat.com.tr";
 const brand = "Kayseri Hanedan Nakliyat";
 const primaryPhone = "+90 533 781 38 04";
 const primaryTel = "+905337813804";

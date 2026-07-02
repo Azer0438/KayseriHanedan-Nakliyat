@@ -2,7 +2,8 @@
   "scripts": {
     "optimize:images": "node scripts/optimize-images.js",
     "build": "node generate-site.js",
-    "build:full": "npm run optimize:images ; npm run build"
+    "build:full": "npm run optimize:images ; npm run build",
+    "smoke": "node scripts/smoke-check.js"
   },
   "dependencies": {
     "puppeteer": "^25.3.0"
