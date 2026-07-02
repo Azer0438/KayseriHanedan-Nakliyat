@@ -799,16 +799,18 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${cleanUrl}">
   <meta property="og:site_name" content="${brand}">
-  <meta property="og:image" content="${siteUrl}${heroImage}">
+  <meta property="og:image" content="${siteUrl}/assets/images/logo.png">
+  <meta property="og:image:secure_url" content="${siteUrl}/assets/images/logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${siteUrl}/assets/images/logo.png">
   <meta name="author" content="${brand}">
   <meta name="theme-color" content="#AC0A15">
   <link rel="alternate" hreflang="tr-TR" href="${cleanUrl}">
   <link rel="alternate" hreflang="x-default" href="${cleanUrl}">
-  <link rel="icon" href="/assets/images/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="icon" href="/assets/images/favicon.png?v=2" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png?v=2">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
