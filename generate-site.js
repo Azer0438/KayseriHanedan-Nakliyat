@@ -822,6 +822,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
+    gtag('config', 'G-D3F349WY9D');
     gtag('config', 'AW-18292997846');
     gtag('config', 'AW-18292997846/WMi5CNX8nckcENb945JE', {
       'phone_conversion_number': '+90 533 781 38 04'
