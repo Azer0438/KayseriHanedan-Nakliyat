@@ -49,6 +49,38 @@ const heroSlides = [
   }
 ];
 const galleryVideos = Array.from({ length: 9 }, (_, index) => `/assets/media/gallery-video-${index + 1}.mp4`);
+const blogPosts = [
+  {
+    slug: "kayseri-ev-tasima-oncesi-kontrol-listesi",
+    title: "Kayseri'de Ev Taşımadan Önce Kontrol Listesi",
+    description: "Ev taşıma öncesi adres, kat, paketleme, asansör ve zaman planı için pratik kontrol listesi.",
+    date: "2026-07-02",
+    category: "Evden Eve Nakliyat",
+    keywords: "kayseri ev taşıma, taşınma kontrol listesi, kayseri nakliyat önerileri",
+    content: [
+      "Taşınma sürecinde en sık yapılan hata, planlamayı son güne bırakmaktır. Kayseri gibi yoğun trafiğin olduğu bölgelerde park alanı, bina giriş genişliği ve taşıma saatinin doğru seçilmesi süreci doğrudan etkiler.",
+      "Taşıma tarihinden en az bir hafta önce eşya sınıflandırması yapın. Kırılabilir ürünleri, günlük ihtiyaç kutusunu ve ilk gün kullanılacak eşyaları ayrı hazırlamak yeni adreste düzen kurmayı kolaylaştırır.",
+      "Asansörlü taşıma gerekiyorsa bina cephesi ve sokak uygunluğu önceden kontrol edilmelidir. Uygunluk onayı alınmadan yapılan planlar taşıma gününde gecikmeye neden olabilir.",
+      "Kayseri içinde ilçe geçişli taşımalar için sabah erken saatler genellikle daha verimlidir. Özellikle Melikgazi, Kocasinan ve Talas hattında trafik saatlerini dikkate almak gerekir.",
+      "Teklif alırken yalnızca fiyat değil, hizmet kapsamı da karşılaştırılmalıdır. Paketleme malzemesi, söküm-montaj, kat bilgisi, ek personel ve sigorta kapsamı net yazılmalıdır."
+    ]
+  },
+  {
+    slug: "asansorlu-nakliyat-ne-zaman-gerekli",
+    title: "Asansörlü Nakliyat Ne Zaman Gerekli Olur?",
+    description: "Yüksek katlı binalarda asansörlü nakliyatın avantajları ve uygunluk kriterleri.",
+    date: "2026-07-02",
+    category: "Asansörlü Nakliyat",
+    keywords: "asansörlü nakliyat kayseri, dış cephe asansörü, yüksek kat taşıma",
+    content: [
+      "Asansörlü nakliyat, özellikle bina içi merdiven boşluklarının dar olduğu yapılarda eşya güvenliği ve hız açısından önemli avantaj sağlar.",
+      "Bina dış cephesinde asansör kurulabilecek uygun nokta, araç park alanı ve balkon/pencere erişimi varsa operasyon daha güvenli yürütülür.",
+      "Büyük hacimli koltuk, beyaz eşya ve gardırop gibi ürünlerde bina içi taşıma yerine asansörlü sistem hasar riskini ciddi ölçüde azaltır.",
+      "Asansör kararı, sadece kat sayısına göre değil eşya tipi, bina mimarisi ve mahalle erişimine göre verilmelidir.",
+      "Profesyonel ekip tarafından yapılan ön keşif, taşıma günü sürprizlerini azaltır ve süreyi kısaltır."
+    ]
+  }
+];
 
 const services = [
   {
@@ -227,6 +259,7 @@ const nav = [
   ]],
   ["Hizmetlerimiz", "/hizmetler/", services.map((service) => [service.shortTitle, `/hizmetler/${service.slug}/`])],
   ["Bölgeler", "/bolgeler/", districts.map(([slug, title]) => [title, `/bolgeler/${slug}-evden-eve-nakliyat/`])],
+  ["Blog", "/blog/"],
   ["Galeri", "/galeri/"],
   ["Teklif Al", "/teklif-al/"],
   ["İletişim", "/iletisim/"]
@@ -345,16 +378,27 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="${cleanUrl}">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${cleanUrl}">
   <meta property="og:site_name" content="${brand}">
   <meta property="og:image" content="${siteUrl}${heroImage}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="author" content="${brand}">
   <meta name="theme-color" content="#AC0A15">
+  <link rel="alternate" hreflang="tr-TR" href="${cleanUrl}">
+  <link rel="alternate" hreflang="x-default" href="${cleanUrl}">
   <link rel="icon" href="/assets/images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preload" as="image" href="${heroImage}">
+  <link rel="preload" as="style" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script type="application/ld+json">${JSON.stringify(allSchema.length === 1 ? allSchema[0] : { "@context": "https://schema.org", "@graph": allSchema })}</script>
 </head>
@@ -735,6 +779,9 @@ function servicePage(service) {
     <div class="container detail-grid">
       <article class="detail-copy">
         ${service.content.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+        <h2>${service.shortTitle} Fiyatını Etkileyen Unsurlar</h2>
+        <p>Fiyatlandırmada sadece mesafe değil, eşya hacmi, kat durumu, paketleme kapsamı, asansör gereksinimi, bina erişimi ve ek personel ihtiyacı birlikte değerlendirilir. Bu nedenle net teklif için kısa bir ön bilgi paylaşımı büyük fark yaratır.</p>
+        <p>Kayseri içi taşımalarda trafik saatleri ve park uygunluğu; şehirler arası taşımalarda ise rota ve teslim tarih aralığı maliyet planlamasını doğrudan etkiler.</p>
         <h2>${service.shortTitle} Süreci Nasıl İlerler?</h2>
         <ol class="number-list">
           <li>Adres, kat, eşya yoğunluğu ve tarih bilgileri alınır.</li>
@@ -816,6 +863,8 @@ function districtPage([slug, title, note]) {
         <p>${title} evden eve nakliyat sürecinde taşıma günü oluşabilecek aksaklıkları azaltmak için adres, kat, eşya yoğunluğu ve araç park alanı önceden değerlendirilir.</p>
         <p>Hanedan Nakliyat; ${title} ve çevresinde ev taşıma, ofis taşıma, asansörlü nakliyat, paketleme ve parça eşya taşıma ihtiyaçlarına göre ekip ve araç planlar.</p>
         <p>Kayseri içinde kısa mesafeli taşımalarda hızlı teslimat, şehirler arası taşımada ise doğru yükleme ve rota planı önceliğimizdir.</p>
+        <h2>${title} Bölgesinde Taşınma Öncesi Öneriler</h2>
+        <p>Taşıma gününden önce bina yönetimi bilgilendirilmesi, asansör kullanım saatinin netleştirilmesi ve park alanı planı yapılması operasyon hızını artırır. Özellikle yoğun sokaklarda erken saat planlaması daha verimli sonuç verir.</p>
         <h2>${title} Bölgesinde Sunduğumuz Hizmetler</h2>
         <div class="mini-service-list">${services.slice(0, 6).map((service) => `<a href="/hizmetler/${service.slug}/">${service.shortTitle}</a>`).join("")}</div>
       </article>
@@ -866,20 +915,32 @@ function corporatePage(slug, title, body) {
 
 function galleryPage() {
   const imageCards = [
-    [heroImage, "Hanedan Nakliyat ana gorseli"],
-    [truckImage, "Hanedan Nakliyat arac gorseli"],
-    [buildingImage, "Kayseri Hanedan Nakliyat bina onu arac gorseli"],
-    [secondTruckImage, "Kayseri Hanedan Nakliyat ikinci arac gorseli"]
+    [heroImage, "Hanedan Nakliyat ana görseli"],
+    [truckImage, "Hanedan Nakliyat araç görseli"],
+    [buildingImage, "Kayseri Hanedan Nakliyat bina önü araç görseli"],
+    [secondTruckImage, "Kayseri Hanedan Nakliyat ikinci araç görseli"]
   ].map(([src, alt], index) => `<a href="${src}" class="gallery-item${index === 1 ? " tall" : ""}"><img src="${src}" alt="${alt}"></a>`).join("");
-  const videoCards = galleryVideos.map((src, index) => `<div class="video-card"><video src="${src}" controls muted playsinline preload="metadata"></video><h2>Hanedan Nakliyat Video ${index + 1}</h2><p>Tasima surecinden arac ve ekip goruntuleri.</p></div>`).join("");
+  const videoCards = galleryVideos.map((src, index) => `<div class="video-card"><video src="${src}" controls controlsList="nofullscreen nodownload" muted playsinline preload="metadata"></video><h2>Hanedan Nakliyat Video ${index + 1}</h2><p>Taşıma sürecinden araç ve ekip görüntüleri.</p></div>`).join("");
   const content = `
   <section class="page-hero compact-hero">
     <div class="container">${breadcrumb([["Galeri", "/galeri/"]])}<span class="kicker">Galeri</span><h1>Kayseri Hanedan Nakliyat Galeri</h1><p>Araç, ekipman ve taşıma süreçlerimizden görseller.</p></div>
   </section>
   <section class="section">
-    <div class="container gallery-grid">
-      ${imageCards}
-      ${videoCards}
+    <div class="container">
+      <div class="gallery-tabs">
+        <button class="gallery-tab-btn active" data-tab="images" type="button">Görseller</button>
+        <button class="gallery-tab-btn" data-tab="videos" type="button">Videolar</button>
+      </div>
+      <div class="gallery-tab-pane active" id="images-tab">
+        <div class="gallery-grid">
+          ${imageCards}
+        </div>
+      </div>
+      <div class="gallery-tab-pane" id="videos-tab">
+        <div class="gallery-grid videos-grid">
+          ${videoCards}
+        </div>
+      </div>
     </div>
   </section>`;
   return pageLayout({
@@ -939,6 +1000,69 @@ function quotePage() {
     description: "Kayseri evden eve nakliyat, asansörlü taşıma, ofis taşıma ve şehirler arası nakliyat için hızlı teklif formu.",
     url: "/teklif-al/",
     content
+  });
+}
+
+function blogIndexPage() {
+  const content = `
+  <section class="page-hero compact-hero">
+    <div class="container">${breadcrumb([["Blog", "/blog/"]])}<span class="kicker">Blog</span><h1>Nakliyat Rehberi</h1><p>Kayseri evden eve nakliyat, asansörlü taşıma ve taşınma planlaması için pratik içerikler.</p></div>
+  </section>
+  <section class="section pattern-bg">
+    <div class="container district-grid">
+      ${blogPosts.map((post) => `<article class="district-card"><h2>${post.title}</h2><p>${post.description}</p><p><strong>${post.category}</strong> • ${post.date}</p><a href="/blog/${post.slug}/">Yazıyı oku</a></article>`).join("")}
+    </div>
+  </section>`;
+  return pageLayout({
+    title: `Blog | ${brand}`,
+    description: "Kayseri nakliyat süreçleri için taşınma önerileri, asansörlü taşıma rehberi ve planlama içerikleri.",
+    url: "/blog/",
+    keywords: "kayseri nakliyat blog, taşınma rehberi, ev taşıma ipuçları",
+    content
+  });
+}
+
+function blogPostPage(post) {
+  const postUrl = `/blog/${post.slug}/`;
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.description,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "mainEntityOfPage": absolute(postUrl),
+    "author": {
+      "@type": "Organization",
+      "name": brand
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": brand,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/assets/images/logo.png`
+      }
+    },
+    "image": `${siteUrl}${heroImage}`
+  };
+  const content = `
+  <section class="page-hero compact-hero">
+    <div class="container">${breadcrumb([["Blog", "/blog/"], [post.title, postUrl]])}<span class="kicker">${post.category}</span><h1>${post.title}</h1><p>${post.description}</p></div>
+  </section>
+  <section class="section">
+    <div class="container narrow-copy">
+      ${post.content.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+      <div class="inline-actions mt-40"><a class="btn btn-primary" href="/teklif-al/">Teklif Al</a><a class="btn btn-dark" href="/iletisim/">İletişim</a></div>
+    </div>
+  </section>`;
+  return pageLayout({
+    title: `${post.title} | ${brand}`,
+    description: post.description,
+    url: postUrl,
+    keywords: post.keywords,
+    content,
+    schema: [blogSchema]
   });
 }
 
@@ -1138,12 +1262,21 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 .narrow-copy { max-width: 860px; font-size: 18px; }
 .narrow-copy h2 { font-size: 34px; line-height: 1.16; }
 .narrow-copy p, .narrow-copy li { color: var(--muted); }
+.gallery-tabs { display: flex; gap: 12px; margin-bottom: 30px; border-bottom: 2px solid var(--line); }
+.gallery-tab-btn { background: none; border: 0; padding: 12px 18px; margin-bottom: -2px; color: var(--muted); font-size: 15px; font-weight: 900; text-transform: uppercase; border-bottom: 3px solid transparent; cursor: pointer; }
+.gallery-tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+.gallery-tab-pane { display: none; }
+.gallery-tab-pane.active { display: block; }
 .gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start; }
+.videos-grid { grid-template-columns: 1fr 1fr 1fr; }
 .gallery-item, .video-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
 .gallery-item img { width: 100%; height: 420px; object-fit: cover; }
 .gallery-item.tall img { height: 560px; }
 .video-card video { width: 100%; aspect-ratio: 9/16; object-fit: cover; background: #000; }
 .video-card h2, .video-card p { padding-inline: 22px; }
+.video-card video::-webkit-media-controls-volume-slider { display: none !important; }
+.video-card video::-webkit-media-controls-mute-button { display: none !important; }
+.video-card video::-webkit-media-controls-volume-control-container { display: none !important; }
 .contact-cards { display: grid; gap: 18px; }
 .contact-cards article { background: #fff; padding: 28px; border-radius: var(--radius); box-shadow: var(--shadow); border-left: 4px solid var(--red); }
 .contact-cards article span:first-child { color: var(--red); font-size: 32px; }
@@ -1212,6 +1345,7 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
   .hero-stats, .service-slider, .process-line { grid-template-columns: 1fr 1fr; }
   .footer-grid, .footer-contact { grid-template-columns: 1fr 1fr; }
   .district-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid, .videos-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 820px) {
   .container { width: min(100% - 28px, 1180px); }
@@ -1228,7 +1362,7 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
   .hero-split { grid-template-columns: 1fr; align-items: end; min-height: 100%; padding-bottom: 54px; }
   .hero-content { max-width: 620px; padding: 40px 0 30px; }
   .hero p { font-size: 17px; }
-  .hero-stats, .service-slider, .split-grid, .quote-grid, .contact-grid, .detail-grid, .solution-grid, .two-col-copy, .footer-grid, .footer-contact, .district-grid, .gallery-grid { grid-template-columns: 1fr; }
+  .hero-stats, .service-slider, .split-grid, .quote-grid, .contact-grid, .detail-grid, .solution-grid, .two-col-copy, .footer-grid, .footer-contact, .district-grid, .gallery-grid, .videos-grid { grid-template-columns: 1fr; }
   .section { padding: 70px 0; }
   .solution-grid .service-card { grid-template-columns: 1fr; }
   .why-bg { inset: 0; }
@@ -1384,6 +1518,16 @@ document.querySelectorAll(".quote-form").forEach((form) => {
     const phone = form.dataset.whatsapp || "905337813804";
     window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\\n"));
   });
+});
+
+document.querySelectorAll(".gallery-tab-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const tab = btn.getAttribute("data-tab");
+    document.querySelectorAll(".gallery-tab-btn").forEach((item) => item.classList.remove("active"));
+    document.querySelectorAll(".gallery-tab-pane").forEach((pane) => pane.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(tab + "-tab")?.classList.add("active");
+  });
 });`;
 }
 
@@ -1447,6 +1591,8 @@ addPage("/kurumsal/misyonumuz/", corporatePage("misyonumuz", "Misyonumuz", `<h2>
 addPage("/kurumsal/vizyonumuz/", corporatePage("vizyonumuz", "Vizyonumuz", `<h2>Kayseri'de güvenilir nakliyat denince akla gelen marka olmak</h2><p>Vizyonumuz, evden eve nakliyat ve asansörlü taşıma alanında güvenilir, ulaşılabilir ve modern hizmet anlayışıyla öne çıkan bir marka olmaktır.</p><p>Teknoloji, ekipman, iletişim ve müşteri deneyimi alanlarında sürekli gelişerek daha iyi hizmet sunmayı hedefleriz.</p>`));
 addPage("/kurumsal/calisma-surecimiz/", corporatePage("calisma-surecimiz", "Çalışma Sürecimiz", `<h2>Taşımayı adım adım planlarız</h2><ol class="number-list"><li>İlk görüşmede adres, kat, eşya yoğunluğu ve tarih bilgisi alınır.</li><li>Gerekirse fotoğraf veya yerinde keşif ile taşıma kapsamı netleştirilir.</li><li>Paketleme, araç, ekip ve asansör ihtiyacı belirlenir.</li><li>Taşıma günü eşyalar korumalı şekilde yüklenir ve yeni adrese ulaştırılır.</li><li>Teslimat sonrası montaj ve yerleşim desteği tamamlanır.</li></ol>`));
 addPage("/kurumsal/kvkk/", corporatePage("kvkk", "KVKK", `<h2>Kişisel verilerin korunması</h2><p>Kayseri Hanedan Nakliyat ile iletişim kurarken paylaştığınız ad, soyad, telefon, adres ve taşıma detayları yalnızca teklif, planlama ve iletişim amacıyla kullanılır.</p><p>Bu bilgiler üçüncü kişilerle ticari amaçla paylaşılmaz. WhatsApp üzerinden gönderilen bilgiler, teklif sürecinin yürütülmesi için tarafınızca iletilmiş kabul edilir.</p><p>Verilerinizle ilgili talepleriniz için telefon hatlarımızdan bize ulaşabilirsiniz.</p>`));
+addPage("/blog/", blogIndexPage());
+blogPosts.forEach((post) => addPage(`/blog/${post.slug}/`, blogPostPage(post)));
 addPage("/galeri/", galleryPage());
 addPage("/iletisim/", contactPage());
 addPage("/teklif-al/", quotePage());
