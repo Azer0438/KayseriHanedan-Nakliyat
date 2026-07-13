@@ -15,6 +15,15 @@ const coreConversions = [
   { src: "logo-navbar.png", webp: "logo-navbar.webp", fallback: "logo-navbar-fallback.png" }
 ];
 
+const responsiveVariants = [
+  { src: "hero-slide-1.png", base: "hero-slide-1", widths: [768, 1200, 1672], quality: 74 },
+  { src: "hero-slide-4.jpeg", base: "hero-slide-4", widths: [640, 960, 1280, 1800], quality: 68 },
+  { src: "hanedan-arac.jpeg", base: "hanedan-arac", widths: [640, 960, 1280, 1800], quality: 68 },
+  { src: "hanedan-arac-bina.jpeg", base: "hanedan-arac-bina", widths: [480, 768, 1080, 1440], quality: 72 },
+  { src: "logo-navbar.png", base: "logo-navbar", widths: [214, 330, 480, 660], quality: 82 },
+  { src: "logo.png", base: "logo", widths: [180, 320, 640], quality: 82 }
+];
+
 const imageExtensions = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 const skipImports = new Set(["favicon.png", "favicon.webp"]);
 
@@ -32,6 +41,14 @@ async function toWebp(inputPath, outputPath) {
   await sharp(inputPath)
     .rotate()
     .webp({ quality: 78, effort: 5 })
+    .toFile(outputPath);
+}
+
+async function toResponsiveWebp(inputPath, outputPath, width, quality) {
+  await sharp(inputPath)
+    .rotate()
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality, effort: 6 })
     .toFile(outputPath);
 }
 
@@ -64,6 +81,21 @@ async function run() {
     await toWebp(srcPath, webpPath);
     await toFallback(srcPath, fallbackPath);
     console.log(`[ok] ${src} -> ${item.webp} + ${item.fallback}`);
+  }
+
+  for (const item of responsiveVariants) {
+    const srcPath = path.join(assetsDir, item.src);
+    if (!fs.existsSync(srcPath)) {
+      console.warn(`[skip] Missing responsive source: ${item.src}`);
+      continue;
+    }
+
+    for (const width of item.widths) {
+      const outputName = `${item.base}-${width}.webp`;
+      const outputPath = path.join(assetsDir, outputName);
+      await toResponsiveWebp(srcPath, outputPath, width, item.quality);
+      console.log(`[responsive] ${item.src} -> ${outputName}`);
+    }
   }
 
   if (!fs.existsSync(importsDir)) {

@@ -28,6 +28,45 @@ const logoImage = "/assets/images/logo.webp";
 const logoImageFallback = "/assets/images/logo-fallback.png";
 const logoNavbarImage = "/assets/images/logo-navbar.webp";
 const logoNavbarImageFallback = "/assets/images/logo-navbar-fallback.png";
+
+const imageMeta = {
+  [heroImage]: {
+    width: 1672,
+    height: 941,
+    srcset: "/assets/images/hero-slide-1-768.webp 768w, /assets/images/hero-slide-1-1200.webp 1200w, /assets/images/hero-slide-1-1672.webp 1672w",
+    sizes: "100vw"
+  },
+  [truckImage]: {
+    width: 3024,
+    height: 4032,
+    srcset: "/assets/images/hanedan-arac-640.webp 640w, /assets/images/hanedan-arac-960.webp 960w, /assets/images/hanedan-arac-1280.webp 1280w, /assets/images/hanedan-arac-1800.webp 1800w",
+    sizes: "100vw"
+  },
+  [buildingImage]: {
+    width: 1800,
+    height: 1350,
+    srcset: "/assets/images/hanedan-arac-bina-480.webp 480w, /assets/images/hanedan-arac-bina-768.webp 768w, /assets/images/hanedan-arac-bina-1080.webp 1080w, /assets/images/hanedan-arac-bina-1440.webp 1440w",
+    sizes: "(max-width: 760px) 100vw, (max-width: 1120px) 50vw, 560px"
+  },
+  [secondTruckImage]: {
+    width: 3024,
+    height: 4032,
+    srcset: "/assets/images/hero-slide-4-640.webp 640w, /assets/images/hero-slide-4-960.webp 960w, /assets/images/hero-slide-4-1280.webp 1280w, /assets/images/hero-slide-4-1800.webp 1800w",
+    sizes: "100vw"
+  },
+  [logoImage]: {
+    width: 1110,
+    height: 312,
+    srcset: "/assets/images/logo-180.webp 180w, /assets/images/logo-320.webp 320w, /assets/images/logo-640.webp 640w",
+    sizes: "220px"
+  },
+  [logoNavbarImage]: {
+    width: 1514,
+    height: 350,
+    srcset: "/assets/images/logo-navbar-214.webp 214w, /assets/images/logo-navbar-330.webp 330w, /assets/images/logo-navbar-480.webp 480w, /assets/images/logo-navbar-660.webp 660w",
+    sizes: "(max-width: 560px) 214px, (max-width: 920px) 250px, 330px"
+  }
+};
 const heroSlides = [
   {
     image: heroImage,
@@ -677,7 +716,14 @@ function absolute(url) {
 
 function picture(webpSrc, fallbackSrc, alt, attrs = "") {
   const fallback = fallbackSrc || webpSrc;
-  return `<picture><source srcset="${webpSrc}" type="image/webp"><img src="${fallback}" alt="${alt}"${attrs}></picture>`;
+  const meta = imageMeta[webpSrc] || {};
+  const srcset = meta.srcset || webpSrc;
+  const sizes = meta.sizes ? ` sizes="${meta.sizes}"` : "";
+  const dimensions = meta.width && meta.height && !/\swidth=/.test(attrs) && !/\sheight=/.test(attrs) ? ` width="${meta.width}" height="${meta.height}"` : "";
+  const shouldLoadEarly = attrs.includes("fetchpriority=\"high\"") || attrs.includes("brand-logo");
+  const loading = !shouldLoadEarly && !/\sloading=/.test(attrs) ? ' loading="lazy"' : "";
+  const decoding = !/\sdecoding=/.test(attrs) ? ' decoding="async"' : "";
+  return `<picture><source srcset="${srcset}"${sizes} type="image/webp"><img src="${fallback}" alt="${alt}"${attrs}${dimensions}${loading}${decoding}></picture>`;
 }
 
 function siteSearchSchema() {
@@ -727,7 +773,7 @@ function icon(name) {
 
 function logoMarkup() {
   return `<a class="brand" href="/" aria-label="${brand} anasayfa">
-    ${picture(logoNavbarImage, logoNavbarImageFallback, brand, ' class="brand-logo" width="1514" height="350"')}
+    ${picture(logoNavbarImage, logoNavbarImageFallback, brand, ' class="brand-logo" width="330" height="76"')}
   </a>`;
 }
 
@@ -815,8 +861,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preload" as="image" href="${heroImage}" type="image/webp">
-  <link rel="preload" as="image" href="${heroImageFallback}">
+  <link rel="preload" as="image" href="/assets/images/hanedan-arac-960.webp" imagesrcset="${imageMeta[truckImage].srcset}" imagesizes="${imageMeta[truckImage].sizes}" type="image/webp" fetchpriority="high">
   <link rel="preload" as="style" href="${cssAssetPath}">
   <link rel="stylesheet" href="${cssAssetPath}">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18292997846"></script>
@@ -860,7 +905,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
       </div>
       <nav class="mobile-nav" id="mobileNav" aria-label="Mobil menü">
         <div class="mobile-panel-head">
-          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa">${picture(logoImage, logoImageFallback, brand, ' width="1110" height="312"')}</a>
+          <a class="mobile-panel-logo" href="/" aria-label="${brand} anasayfa">${picture(logoImage, logoImageFallback, brand, ' width="220" height="62"')}</a>
           <button class="mobile-close" type="button" aria-label="Menüyü kapat">×</button>
         </div>
         <div class="mobile-search" role="search">
@@ -880,7 +925,7 @@ function pageLayout({ title, description, url, keywords, bodyClass = "", content
     <a class="float-call" href="tel:${primaryTel}" aria-label="Telefon">${icon("phoneBooth")}</a>
     <a class="float-instagram" href="${instagramUrl}" target="_blank" rel="noopener" aria-label="Instagram">${icon("instagram")}</a>
   </div>
-  <script src="${jsAssetPath}"></script>
+  <script src="${jsAssetPath}" defer></script>
 </body>
 </html>`;
 }
