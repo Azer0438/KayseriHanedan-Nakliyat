@@ -2042,6 +2042,33 @@ function js() {
   window.dataLayer.push({ event: name, ...params });
 }
 
+const whatsappConversionSendTo = "AW-18292997846/Fd6KCIjj6M8cENb945JE";
+
+function trackAdsConversion(sendTo, callback) {
+  const done = () => {
+    if (typeof callback === "function") callback();
+  };
+
+  if (typeof window.gtag !== "function") {
+    done();
+    return;
+  }
+
+  let completed = false;
+  const finish = () => {
+    if (completed) return;
+    completed = true;
+    done();
+  };
+
+  window.gtag("event", "conversion", {
+    send_to: sendTo,
+    event_callback: finish,
+    event_timeout: 800
+  });
+  window.setTimeout(finish, 900);
+}
+
 const menuToggle = document.querySelector(".menu-toggle");
 const mobileNav = document.querySelector(".mobile-nav");
 const mobileClose = document.querySelector(".mobile-close");
@@ -2153,7 +2180,10 @@ document.querySelectorAll(".quote-form").forEach((form) => {
     });
 
     const phone = form.dataset.whatsapp || "905337813804";
-    window.location.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\\n"));
+    const href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(lines.join("\\n"));
+    trackAdsConversion(whatsappConversionSendTo, () => {
+      window.location.href = href;
+    });
   });
 });
 
@@ -2167,10 +2197,25 @@ document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
 });
 
 document.querySelectorAll('a[href*="wa.me/"]').forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (event) => {
     trackEvent("contact_click", {
       contact_type: "whatsapp",
       destination: link.getAttribute("href") || ""
+    });
+
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    event.preventDefault();
+    const href = link.href;
+    const opensNewTab = link.target === "_blank";
+    trackAdsConversion(whatsappConversionSendTo, () => {
+      if (opensNewTab) {
+        window.open(href, "_blank", "noopener");
+        return;
+      }
+      window.location.href = href;
     });
   });
 });
