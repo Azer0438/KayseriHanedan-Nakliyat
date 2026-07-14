@@ -1950,6 +1950,8 @@ details p { padding: 0 24px 20px; margin: 0; color: var(--muted); }
 .narrow-copy { max-width: 860px; font-size: 18px; }
 .narrow-copy h2 { font-size: 34px; line-height: 1.16; }
 .narrow-copy p, .narrow-copy li { color: var(--muted); }
+.narrow-copy p a, .narrow-copy li a { color: var(--red-dark); font-weight: 900; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.narrow-copy p a:hover, .narrow-copy li a:hover { color: var(--red); }
 .gallery-tabs { display: flex; gap: 12px; margin-bottom: 30px; border-bottom: 2px solid var(--line); }
 .gallery-tab-btn { background: none; border: 0; padding: 12px 18px; margin-bottom: -2px; color: var(--muted); font-size: 15px; font-weight: 900; text-transform: uppercase; border-bottom: 3px solid transparent; cursor: pointer; }
 .gallery-tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
