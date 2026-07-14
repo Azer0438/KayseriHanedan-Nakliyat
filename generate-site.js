@@ -105,6 +105,29 @@ const heroSlides = [
 const galleryVideos = Array.from({ length: 9 }, (_, index) => `/assets/media/gallery-video-${index + 1}.mp4`);
 const blogPosts = [
   {
+    slug: "kayseride-yeni-eve-tasinirken-dogalgaz-islemleri",
+    title: "Kayseri'de Yeni Eve Taşınırken Doğalgaz İşlemleri: Kontrol Listesi",
+    seoTitle: "Kayseri'de Taşınırken Doğalgaz İşlemleri | Hanedan Nakliyat",
+    description: "Kayseri'de yeni bir eve taşınırken doğalgaz aboneliği, tesisat, kombi ve proje konusunda kontrol etmeniz gereken temel adımları öğrenin.",
+    date: "2026-07-14",
+    category: "Taşınma Rehberi",
+    keywords: "taşınırken doğalgaz işlemleri, kayseri taşınma rehberi, doğalgaz aboneliği taşınma",
+    content: [
+      "Yeni bir eve taşınmak yalnızca eşyaların paketlenmesi ve nakliye aracına yüklenmesinden ibaret değildir. Elektrik, su, internet ve doğalgaz gibi temel hizmetlerin de taşınmadan önce planlanması gerekir.",
+      "Özellikle doğalgaz aboneliği, kombi bağlantısı ve tesisat durumu önceden kontrol edilmediğinde yeni evde ilk günlerde ısınma ve sıcak su problemi yaşanabilir. Kayseri'de yeni bir eve taşınırken aşağıdaki kontrolleri yapmanız sürecin daha rahat ilerlemesini sağlar.",
+      "<strong>1. Doğalgaz aboneliğinin durumunu öğrenin.</strong> Taşınacağınız konutta daha önce doğalgaz kullanılmış olması aboneliğin otomatik olarak devam edeceği anlamına gelmez. Eski kullanıcının aboneliği kapatılmış olabilir. Taşınmadan önce ilgili doğalgaz dağıtım şirketinden konutun abonelik durumunu öğrenin.",
+      "<strong>2. Tesisat ve doğalgaz projesini kontrol ettirin.</strong> Yeni taşınacağınız evde doğalgaz tesisatı bulunabilir ancak tesisatta değişiklik yapılmış, kombinin yeri değiştirilmiş veya yeni bir cihaz bağlantısı eklenmiş olabilir. Bu gibi durumlarda mevcut tesisatın ve projenin uygunluğunun uzman bir firma tarafından değerlendirilmesi önemlidir.",
+      "Kayseri'de doğalgaz projesi, tesisat kontrolü veya kombi bağlantısı konusunda destek almak için <a href=\"https://www.dogtekdogalgazmuhendislik.com/kayseri-dogalgaz-hizmetleri\">Doğtek Doğalgaz ve Mühendislik</a> ile iletişime geçebilirsiniz.",
+      "<strong>3. Kombinin çalışır durumda olduğundan emin olun.</strong> Taşınmadan önce kombinin açılıp açılmadığını, sıcak su verip vermediğini ve peteklerin çalışıp çalışmadığını kontrol edin. Ev uzun süredir kullanılmıyorsa cihazın bakıma ihtiyacı olabilir.",
+      "<strong>4. Kombi ve tesisat çevresini boş bırakın.</strong> Nakliye sırasında koliler, mobilyalar veya beyaz eşyalar kombinin ve doğalgaz tesisatının önünü kapatmamalıdır. Kombi, doğalgaz vanası ve sayaç gibi alanların erişilebilir olması kontrolleri kolaylaştırır.",
+      "<strong>5. Doğalgaz randevusunu taşınma gününe bırakmayın.</strong> Abonelik veya gaz açma işlemi için randevu gerekiyorsa başvuruyu taşınmadan birkaç gün önce tamamlamak faydalıdır. Nakliye, temizlik, internet kurulumu ve abonelik işlemlerini aynı güne sıkıştırmak süreci zorlaştırabilir.",
+      "<strong>6. Ev sahibinden mevcut belgeleri isteyin.</strong> Kiracı olarak taşınıyorsanız ev sahibinden veya önceki kullanıcıdan tesisat, kombi ve proje hakkında bilgi isteyebilirsiniz. Kombinin bakım geçmişi ve mevcut abonelik durumu sonradan yaşanabilecek sorunların önüne geçebilir.",
+      "<strong>7. Taşınma öncesi kontrol listesi hazırlayın.</strong> Doğalgaz abonelik durumu, kombinin çalışması, sıcak su kontrolü, peteklerin durumu, doğalgaz vanasına erişim, tesisat veya proje değişikliği ve gerekli başvuru randevularını taşınma tarihinden önce kontrol edin.",
+      "Taşınma öncesinde nakliye ve abonelik işlemlerini birlikte planlamak zaman kaybını önler. Eşyaların güvenli biçimde taşınmasının yanı sıra yeni evdeki elektrik, su, internet ve doğalgaz işlemlerinin de önceden organize edilmesi gerekir.",
+      "Kayseri'de evden eve nakliyat hizmeti alırken taşınma tarihini, bina koşullarını ve teslim adresindeki erişim durumunu nakliyat firmasıyla önceden paylaşmanız sürecin daha düzenli ilerlemesini sağlar."
+    ]
+  },
+  {
     slug: "kayseri-ev-tasima-oncesi-kontrol-listesi",
     title: "Kayseri'de Ev Taşımadan Önce Kontrol Listesi",
     description: "Ev taşıma öncesi adres, kat, paketleme, asansör ve zaman planı için pratik kontrol listesi.",
@@ -1722,7 +1745,7 @@ function blogPostPage(post) {
     </div>
   </section>`;
   return pageLayout({
-    title: `${post.title} | ${brand}`,
+    title: post.seoTitle || `${post.title} | ${brand}`,
     description: post.description,
     url: postUrl,
     keywords: post.keywords,
