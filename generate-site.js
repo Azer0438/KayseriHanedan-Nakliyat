@@ -994,7 +994,7 @@ function footerMarkup() {
     </div>
     <div class="container footer-bottom">
       <p>© 2026 ${brand}. Tüm hakları saklıdır.</p>
-      <p>Tasarım <a class="barbarossoft-badge" href="https://barbarossoft.com.tr/" target="_blank" rel="noopener">BarbarosSoft</a> tarafından yapılmıştır.</p>
+      <p>Bu sitenin web tasarım ve SEO hizmetleri <a class="barbarossoft-badge" href="https://barbarossoft.com.tr/" target="_blank" rel="noopener">BarbarosSoft</a> tarafından yapılmıştır.</p>
     </div>
   </footer>`;
 }
